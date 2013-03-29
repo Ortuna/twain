@@ -4,7 +4,9 @@ begin
   spec_tasks = Dir['spec/*/'].map do |d| 
     next if d == 'spec/fixture/'
     File.basename(d);
-  end
+  end.compact!
+
+
   spec_tasks.each do |folder|
     RSpec::Core::RakeTask.new("spec:#{folder}") do |t|
       t.pattern = "./spec/#{folder}/**/*_spec.rb"

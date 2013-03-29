@@ -9,8 +9,5 @@ RSpec.configure do |conf|
 end
 
 def app
-  ##
-  # You can handle all padrino applications using instead:
-  #   Padrino.application
   Twain::App.tap { |app|  }
 end
