@@ -15,14 +15,10 @@ gem 'rake'
 
 # Component requirements
 gem 'slim'
-gem 'dm-sqlite-adapter'
 gem 'dm-validations'
-gem 'dm-timestamps'
-gem 'dm-migrations'
-gem 'dm-constraints'
-gem 'dm-aggregates'
 gem 'dm-types'
 gem 'dm-core'
+gem 'dm-gitfs-adapter', path: '../dm-gitfs-adapter'
 
 # Test requirements
 gem 'rspec', :group => 'test'

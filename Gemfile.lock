@@ -1,3 +1,11 @@
+PATH
+  remote: ../dm-gitfs-adapter
+  specs:
+    dm-gitfs-adapter (1.0.0)
+      dm-core
+      dm-types
+      grit
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -6,25 +14,9 @@ GEM
       multi_json (~> 1.0)
     addressable (2.2.8)
     bcrypt-ruby (3.0.1)
-    data_objects (0.10.12)
-      addressable (~> 2.1)
     diff-lcs (1.2.1)
-    dm-aggregates (1.2.0)
-      dm-core (~> 1.2.0)
-    dm-constraints (1.2.0)
-      dm-core (~> 1.2.0)
     dm-core (1.2.0)
       addressable (~> 2.2.6)
-    dm-do-adapter (1.2.0)
-      data_objects (~> 0.10.6)
-      dm-core (~> 1.2.0)
-    dm-migrations (1.2.0)
-      dm-core (~> 1.2.0)
-    dm-sqlite-adapter (1.2.0)
-      dm-do-adapter (~> 1.2.0)
-      do_sqlite3 (~> 0.10.6)
-    dm-timestamps (1.2.0)
-      dm-core (~> 1.2.0)
     dm-types (1.2.2)
       bcrypt-ruby (~> 3.0)
       dm-core (~> 1.2.0)
@@ -35,9 +27,11 @@ GEM
       uuidtools (~> 2.1)
     dm-validations (1.2.0)
       dm-core (~> 1.2.0)
-    do_sqlite3 (0.10.12)
-      data_objects (= 0.10.12)
     fastercsv (1.5.5)
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
     http_router (0.11.0)
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
@@ -79,6 +73,7 @@ GEM
       mail (~> 2.5.3)
       padrino-core (= 0.11.0)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -115,12 +110,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  dm-aggregates
-  dm-constraints
   dm-core
-  dm-migrations
-  dm-sqlite-adapter
-  dm-timestamps
+  dm-gitfs-adapter!
   dm-types
   dm-validations
   padrino (= 0.11.0)
