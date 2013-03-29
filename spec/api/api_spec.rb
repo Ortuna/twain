@@ -9,9 +9,5 @@ describe 'api' do
   after :each do
     FileUtils.rm_rf @tmp_path
   end
-
-  it 'sanity check' do
-    get '/'
-    last_response.should be_ok
-  end
+  
 end

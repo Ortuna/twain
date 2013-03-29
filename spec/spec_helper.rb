@@ -11,3 +11,7 @@ end
 def app
   Twain::App.tap { |app|  }
 end
+
+def parse_json(json)
+  MultiJson.load(json)
+end

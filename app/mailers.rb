@@ -33,6 +33,6 @@
 # and then all delivered mail will use these settings unless otherwise specified.
 #
 
-Twain::App.mailer :notifier do
-  # Message definitions here...
-end
+# Twain::App.mailer :notifier do
+#   # Message definitions here...
+# end

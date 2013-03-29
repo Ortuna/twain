@@ -9,6 +9,7 @@ source 'https://rubygems.org'
 
 # Optional JSON codec (faster performance)
 # gem 'oj'
+gem 'multi_json'
 
 # Project requirements
 gem 'rake'
@@ -30,7 +31,3 @@ gem 'padrino', '0.11.0'
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'
 
-# Or Individual Gems
-# %w(core gen helpers cache mailer admin).each do |g|
-#   gem 'padrino-' + g, '0.11.0'
-# end
