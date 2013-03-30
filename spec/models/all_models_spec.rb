@@ -2,7 +2,7 @@ describe 'models' do
   before :each do
     @remote_repo = "#{SPEC_PATH}/fixture/books"
     @tmp_path    = "/tmp/books"
-    DataMapper.setup(:gitfs, "gitfs:://#{@tmp_path}?#{@remote_repo}")
+    DataMapper.setup(:gitfs, "gitfs:://#{@tmp_path}?#{@remote_repo}##local-only")
   end
 
   after :each do
@@ -36,6 +36,16 @@ describe 'models' do
     it 'loads metadata' do 
       section = Book.first.chapters.first.sections.first
       section.metadata.should_not be_nil
+    end
+  end
+
+  describe 'book' do
+    it 'renames itself correctly' do
+      book = Book.first
+      book.base_path = 'xyz'
+      book.save
+
+      Book.first(:base_path => 'xyz').should_not be_nil
     end
   end
 end
