@@ -5,8 +5,9 @@ module Twain
       ::Book.all
     end
 
-    def find_book(base_path)
-      ::Book.first(:base_path => base_path)
+    def find_book(path_or_title)
+      (::Book.all(:base_path => path_or_title) +
+      ::Book.all(:title     => path_or_title)).first
     end
 
     def rename(book, new_name)

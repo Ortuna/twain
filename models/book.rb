@@ -4,8 +4,11 @@ class Book
   resource_type :directory
   has n, :chapters, 'Chapter'
 
-  def rename(new_path)
-    self.base_path = new_path
+  property :title, String
+
+  def rename(new_title)
+    self.title     = new_title
+    self.base_path = new_title.downcase.parameterize
     self.save
   end
 end

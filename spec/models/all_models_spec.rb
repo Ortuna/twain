@@ -40,12 +40,29 @@ describe 'models' do
   end
 
   describe 'book' do
+    
+    it 'has a working title field' do
+      book = Book.first
+      book.title = "Awesome title"
+      book.save
+
+      Book.first(:title => "Awesome title").should_not be_nil
+    end
+
     it 'renames itself correctly' do
       book = Book.first
       book.base_path = 'xyz'
       book.save
 
       Book.first(:base_path => 'xyz').should_not be_nil
+    end
+
+    it 'renames both title and basepath on rename' do
+      book = Book.first
+      book.rename('This new title')
+      Book.first(:base_path => 'this-new-title').should_not be_nil
+      Book.first(:title => 'This new title').should_not be_nil
+      Book.first(:title => 'This new Title').should be_nil
     end
   end
 end
