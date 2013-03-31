@@ -10,7 +10,7 @@ Bundler.require(:default, PADRINO_ENV)
 ##
 # ## Enable devel logging
 #
-# Padrino::Logger::Config[:development][:log_level]  = :devel
+Padrino::Logger::Config[:development][:log_level]  = :devel
 # Padrino::Logger::Config[:development][:log_static] = true
 #
 # ## Configure your I18n
@@ -34,7 +34,7 @@ Bundler.require(:default, PADRINO_ENV)
 # Add your before (RE)load hooks here
 #
 Padrino.before_load do
-  Padrino.dependency_paths << "#{Padrino.root}/app/api/**/*.rb"
+  Padrino.dependency_paths << "#{Padrino.root}/app/**/*.rb"
 end
 
 ##

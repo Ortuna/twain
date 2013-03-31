@@ -1,7 +1,7 @@
 describe Twain::API do
 
   def setup_api(git_path)
-    Twain::API.new(git: git_path, prefix: "#{Padrino.root}/tmp")
+    Helper.setup_api(git_path, 'apiuser', 'apipassword')
   end
 
   describe 'setup' do
@@ -13,6 +13,7 @@ describe Twain::API do
 
     after :each do
       @api.clean!
+      Helper.clean_users
     end
 
 
@@ -33,6 +34,15 @@ describe Twain::API do
 
     it 'fails with an invalid git path' do
       expect {setup_api('xyz repo')}.to raise_error
+    end
+
+    it 'fails with a invalid login' do
+      expect {
+        Twain::API.new(git: @git_path,
+               prefix: "#{Padrino.root}/tmp",
+               username: 'unkownapiuser',
+               password: 'unknownpassword')
+      }.to raise_error
     end
 
   end
