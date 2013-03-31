@@ -1,4 +1,4 @@
-describe 'api' do
+describe Twain::API do
 
   def setup_api(git_path)
     Twain::API.new(git: git_path)

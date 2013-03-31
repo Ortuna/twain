@@ -1,4 +1,4 @@
-describe 'api for books' do
+describe 'Twain::API books' do
   def setup_api(git_path)
     Twain::API.new(git: git_path)
   end

@@ -10,6 +10,7 @@ describe 'models' do
   end
 
   describe 'sanity check' do
+    
     it 'finds a book' do
      Book.first.should_not be_nil
     end
@@ -37,6 +38,7 @@ describe 'models' do
       section = Book.first.chapters.first.sections.first
       section.metadata.should_not be_nil
     end
+
   end
 
   describe 'book' do
@@ -64,5 +66,6 @@ describe 'models' do
       Book.first(:title => 'This new title').should_not be_nil
       Book.first(:title => 'This new Title').should be_nil
     end
+
   end
 end
