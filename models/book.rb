@@ -11,4 +11,17 @@ class Book
     self.base_path = new_title.downcase.parameterize
     self.save
   end
+
+  class << self
+    
+    def find_book(path_or_title)
+      (::Book.all(:base_path => path_or_title) +
+      ::Book.all(:title => path_or_title)).first
+    end
+
+    def all_books
+      ::Book.all
+    end
+
+  end 
 end

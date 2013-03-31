@@ -31,11 +31,9 @@ describe 'api' do
       File.exists?(@api.local_path).should == false
     end
 
-    # xit 'fails with an invalid git path' do
-    #   expect {setup_api('xyz repo')}.to raise_error
-    # end
-
-    # xit 'authenticates user'
+    it 'fails with an invalid git path' do
+      expect {setup_api('xyz repo')}.to raise_error
+    end
 
   end
 

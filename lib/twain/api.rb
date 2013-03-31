@@ -1,12 +1,11 @@
 module Twain
   class API
-    include Twain::Book
-    attr_reader :git_location, :options
+    attr_reader :git_location, :options, :book
 
     def initialize(opts = {})
       @options      = defaults.merge(opts)
       @git_location = options[:git] || nil
-
+      @book         = ::Book
       setup_datamapper
     end
 
@@ -30,5 +29,6 @@ module Twain
         :prefix => '/tmp'
       }
     end
+
   end #API
 end #Twain
