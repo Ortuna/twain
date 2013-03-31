@@ -1,6 +1,6 @@
 describe 'Twain::API books' do
   def setup_api(git_path)
-    Twain::API.new(git: git_path)
+    Twain::API.new(git: git_path, prefix: "#{Padrino.root}/tmp")
   end
 
   before :each do 
