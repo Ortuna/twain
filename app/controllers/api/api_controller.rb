@@ -12,10 +12,12 @@ class Twain::App
     MultiJson::load(json)
   end
 
+  def check_login
+    halt(403, 'login required') unless session[:user]
+  end
+  
   before do
-    if request.path_info[/\A\/api/]
-      halt(403, 'login required') unless session[:user]
-    end
+    check_login if request.path_info[/\A\/api/]
   end
 
   get '/api/books' do
