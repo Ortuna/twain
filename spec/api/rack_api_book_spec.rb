@@ -61,4 +61,17 @@ describe Twain::API do
 
     chapters.first['title'].should_not be_nil
   end
+
+  it 'gets all the sections on a book and chapter' do
+    book_id    = get_repo_list.first["id"]
+
+    get "/api/book/#{book_id}/chapters"
+    chapter_id = Helper.parse_json(last_response.body).first["base_path"]
+
+    get "/api/book/#{book_id}/chapter/#{chapter_id}/sections"
+    last_response.should be_ok
+
+    sections = Helper.parse_json(last_response.body)
+    sections.first["metadata"]["title"].should_not be_nil
+  end
 end
