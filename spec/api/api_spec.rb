@@ -4,9 +4,8 @@ describe Twain::API do
     Helper.setup_api(git_path, 'apiuser', 'apipassword')
   end
 
-  describe 'setup' do
-  
-    before :each do 
+  describe 'basics' do
+    before :each do
       @git_path = "#{SPEC_PATH}/fixture/books#local-only"
       @api      = setup_api @git_path
     end
@@ -15,7 +14,6 @@ describe Twain::API do
       @api.clean!
       Helper.clean_users
     end
-
 
     it 'sets options correctly' do
       @api.git_location.should  == @git_path
@@ -44,8 +42,41 @@ describe Twain::API do
                   password: 'unknownpassword')
       }.to raise_error
     end
-
   end
 
+  describe 'restricted areas' do
+    def login(username, password) 
+      post '/authenticate', { username: username, password: password }
+    end
+
+    before :each do
+      Helper.clean_users
+      clear_cookies
+    end
+
+    it 'should block api to logged in users only' do
+      get '/api/book'
+      last_response.status.should == 403
+    end
+
+    it 'should block api to logged in users only deux' do
+      username, password = 'apiuserz', 'apipasswordz'
+      Helper.create_user(username, password)
+      login(username, 'password')
+
+      get '/api/book'
+      last_response.status.should == 403
+    end
+
+    it 'should not block api if logged in' do
+      username, password = 'apiuserz111', 'apipasswordz123'
+      Helper.create_user(username, password)
+      login('apiuserz111', 'apipasswordz123')
+      get '/api/book'
+      last_response.status.should == 200
+    end
+
+
+  end
 
 end

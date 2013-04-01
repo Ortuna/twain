@@ -2,7 +2,7 @@ begin
   require 'rspec/core/rake_task'
 
   spec_tasks = Dir['spec/*/'].map do |d| 
-    next if d == 'spec/fixture/'
+    next if d == 'spec/fixture/' || d == 'spec/helpers/'
     File.basename(d);
   end.compact!
 
@@ -10,9 +10,8 @@ begin
   spec_tasks.each do |folder|
     RSpec::Core::RakeTask.new("spec:#{folder}") do |t|
       t.pattern = "./spec/#{folder}/**/*_spec.rb"
-      t.rspec_opts = %w(--color -fp -b --order rand)
-      t.rspec_opts << %w(--require spec_helper)
-      t.rspec_opts << %w(--seed 57900)
+      t.rspec_opts = %w(--color -fp -b --order rand --require spec_helper)
+      # t.rspec_opts << %w(--seed 45480)
     end
   end
 

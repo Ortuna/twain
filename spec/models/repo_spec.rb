@@ -1,12 +1,12 @@
 describe Repo do
 
-  after :each do
+  before :each do
     Helper.clean_users
     Helper.clean_repos
   end
 
   it 'creates a repo correctly' do
-    location   = 'http://www.google.com'
+    location = 'http://www.google.com'
     expect{
       user = Helper.create_user('testuser', 'password')
       Helper.create_repo(user[:id], location)

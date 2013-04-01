@@ -4,8 +4,8 @@ module Twain
     register Padrino::Helpers
 
     enable :sessions
-    
     set :allow_disabled_csrf, true
+
     ##
     # Caching support
     #

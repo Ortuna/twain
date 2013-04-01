@@ -4,11 +4,11 @@ class Twain::App
     username = params[:username] || nil
     password = params[:password] || nil
     user     = authenticate_user(username, password)
-    user ? user.to_json : response.status = 403
+    user ? user.to_json : halt(403, 'invalid login')
   end
-
+  
   private
   def authenticate_user(username, password)
-    User.authenticate(username, password).tap { |user| session[:user] = user }
+    User.authenticate(username, password).tap { |user| session['user'] = user }
   end
 end

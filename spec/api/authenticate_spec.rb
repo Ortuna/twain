@@ -1,10 +1,8 @@
 describe 'authentication' do
   before :each do
-    Helper.create_user('apiuser', 'apipassword')
-  end
-
-  after :each do
+    clear_cookies
     Helper.clean_users
+    Helper.create_user('apiuser', 'apipassword')
   end
 
   it 'authenticates a user correctly' do

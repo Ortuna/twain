@@ -1,5 +1,6 @@
 module Helper
   class << self
+
     def tmp_prefix
       "#{Padrino.root}/tmp"
     end
