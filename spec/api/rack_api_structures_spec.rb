@@ -5,6 +5,11 @@ describe Twain::API do
     post '/login', params
   end
 
+  def get_repo_list
+    get '/api/books'
+    Helper.parse_json(last_response.body)
+  end
+
   before :each do
     clear_cookies
     Helper.clear_all
@@ -19,11 +24,6 @@ describe Twain::API do
     repo = Helper.create_repo(user[:id], @repo_location)
 
     login(username, password)
-  end
-
-  def get_repo_list
-    get '/api/books'
-    Helper.parse_json(last_response.body)
   end
 
   it 'gets a list of books' do
