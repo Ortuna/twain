@@ -63,7 +63,9 @@ describe Twain::API do
       chapter   = get_first_chapter
       chapter["title"] = new_title
 
-      post_url = "/api/book/#{get_repo_list.first['id']}/chapter/#{chapter['base_path']}"
+      post_url =  "/api/book/#{get_repo_list.first['id']}"
+      post_url << "/chapter/#{chapter['base_path']}"
+
       post post_url, { chapter: chapter.to_json }
       last_response.should be_ok
 
@@ -73,7 +75,9 @@ describe Twain::API do
 
     it 'rejects unknown chapters' do
       chapter  = get_first_chapter
-      post_url = "/api/book/#{get_repo_list.first['id']}/chapter#{chapter['base_path']}"
+      post_url =  "/api/book/#{get_repo_list.first['id']}"
+      post_url << "/chapter#{chapter['base_path']}"
+
       post post_url, { chapter: {} }
       last_response.should_not be_ok
 
@@ -81,4 +85,28 @@ describe Twain::API do
       last_response.should_not be_ok      
     end
   end#chapter
+
+  describe 'sections' do
+    it 'updates a section record' do
+      new_title = "The now section #{Time.now}"
+      chapter   = get_first_chapter
+      section_list_url =  "/api/book/#{get_repo_list.first['id']}"
+      section_list_url << "/chapter/#{chapter['base_path']}/sections"
+
+      section = get_json_from(section_list_url).first
+
+      post_url =  "/api/book/#{get_repo_list.first['id']}"
+      post_url << "/chapter/#{chapter['base_path']}/section/#{section['base_path']}"
+
+      section["title"] = new_title
+
+      post post_url, { section: section.to_json }
+      last_response.should be_ok
+
+      section = get_json_from(section_list_url).first
+
+      section["title"].should == new_title
+    end
+  end
+
 end

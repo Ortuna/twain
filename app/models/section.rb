@@ -4,4 +4,6 @@ class Section
   resource_type :markdown
   belongs_to :chapter, 'Chapter'
 
+  property :title, String
+
 end
