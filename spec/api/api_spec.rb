@@ -75,8 +75,7 @@ describe Twain::API do
       get '/api/book'
       last_response.status.should == 200
     end
-
-
+    
   end
 
 end
