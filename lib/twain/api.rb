@@ -30,7 +30,7 @@ module Twain
     private
     def setup_datamapper
       DataMapper.setup(:gitfs, "gitfs:://#{local_path}?#{git_location}")
-      railse 'Error creating repo' unless File.exists?(local_path)
+      raise 'Error creating repo' unless File.exists?(local_path)
     end
 
     def defaults

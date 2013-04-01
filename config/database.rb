@@ -14,8 +14,9 @@ DataMapper::Property::String.length(255)
 
 case Padrino.env
 when :test
-  FileUtils.rm Padrino.root('tmp', "test.db")
-  DataMapper.setup(:default, "sqlite3://" + Padrino.root('tmp', "test.db"))
+  test_db_path = Padrino.root('tmp', "test.db")
+  FileUtils.rm(test_db_path) if File.exists?(test_db_path)
+  DataMapper.setup(:default, "sqlite3://" + test_db_path)
 when :development
   DataMapper.setup(:default, "sqlite3://" + Padrino.root('tmp', "development.db"))
 end
