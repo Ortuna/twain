@@ -1,7 +1,7 @@
 describe 'models' do
   before :each do
     @remote_repo = "#{SPEC_PATH}/fixture/books"
-    @tmp_path    = "#{Padrino.root}/tmp/books"
+    @tmp_path    = "#{Helper.tmp_prefix}/books"
     DataMapper.setup(:gitfs, "gitfs:://#{@tmp_path}?#{@remote_repo}##local-only")
   end
 

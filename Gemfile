@@ -13,10 +13,6 @@ gem 'dm-migrations'
 gem 'dm-serializer'
 gem 'bcrypt-ruby'
 
-
-
-
-
 group :development, :test do
   gem 'pry'
   gem 'dm-sqlite-adapter'

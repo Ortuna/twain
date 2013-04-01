@@ -50,6 +50,6 @@ describe 'Twain::API books' do
     book.title.should     == 'this new title'
   end
 
-  it 'should not rename if name already exists'
+  # xit 'should not rename if name already exists'
 
 end

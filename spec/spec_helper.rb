@@ -15,31 +15,6 @@ def app
   Twain::App.tap { |app|  }
 end
 
-
-module Helper
-  class << self  
-    def create_user(username, password)
-      User.new.tap do |user|
-        user.username = username
-        user.password = password
-        user.save
-      end
-    end
-
-    def clean_users
-      User.all.destroy
-    end
-
-    def setup_api(git_path, username = 'apiuser', password = 'password')
-      create_user(username, password)
-      Twain::API.new(git: git_path,
-                     prefix: "#{Padrino.root}/tmp",
-                     username: username,
-                     password: password)
-    end
-
-    def parse_json(json)
-      MultiJson.load(json)
-    end
-  end
+Dir["#{SPEC_PATH}/helpers/**/*.rb"].each do |helper|
+  require helper
 end

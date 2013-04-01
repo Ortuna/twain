@@ -1,5 +1,4 @@
-describe 'api-rack' do
-
+describe 'authentication' do
   before :each do
     Helper.create_user('apiuser', 'apipassword')
   end
@@ -25,9 +24,8 @@ describe 'api-rack' do
     last_response.should_not be_ok
   end
 
-  it 'does someting' do
-    get '/'
-    # last_response.should == true
+  it 'denies without params' do
+    post '/authenticate'
+    last_response.should_not be_ok
   end
-
 end

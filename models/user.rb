@@ -9,7 +9,9 @@ class User
   validates_presence_of   :username, :password
   validates_uniqueness_of :username
 
+  has n, :repos, 'Repo'
   before :save, :encrypt_password
+
 
   def encrypt_password
     self.password = BCrypt::Password.create(self.password)

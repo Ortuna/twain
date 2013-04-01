@@ -10,7 +10,9 @@ begin
   spec_tasks.each do |folder|
     RSpec::Core::RakeTask.new("spec:#{folder}") do |t|
       t.pattern = "./spec/#{folder}/**/*_spec.rb"
-      t.rspec_opts = %w(--color --require spec_helper -fp -b --order rand)
+      t.rspec_opts = %w(--color -fp -b --order rand)
+      t.rspec_opts << %w(--require spec_helper)
+      t.rspec_opts << %w(--seed 57900)
     end
   end
 

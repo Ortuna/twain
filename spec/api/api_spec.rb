@@ -39,9 +39,9 @@ describe Twain::API do
     it 'fails with a invalid login' do
       expect {
         Twain::API.new(git: @git_path,
-               prefix: "#{Padrino.root}/tmp",
-               username: 'unkownapiuser',
-               password: 'unknownpassword')
+                    prefix: Helper.tmp_prefix,
+                  username: 'unkownapiuser',
+                  password: 'unknownpassword')
       }.to raise_error
     end
 
