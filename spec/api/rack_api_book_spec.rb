@@ -48,4 +48,17 @@ describe Twain::API do
     book = Helper.parse_json(last_response.body)
     book["base_path"].should_not be_nil
   end
+
+  it 'gets all the chapters in a book' do
+    book_id = get_repo_list.first["id"]
+    book_id.should_not be_nil
+
+    get "/api/book/#{book_id}/chapters"
+    last_response.should be_ok
+
+    chapters = Helper.parse_json(last_response.body)
+    chapters.count.should be > 1
+
+    chapters.first['title'].should_not be_nil
+  end
 end

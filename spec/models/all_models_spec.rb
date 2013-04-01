@@ -68,4 +68,14 @@ describe 'models' do
     end
 
   end
+
+  describe 'chapter' do
+
+    it 'has a working title field which defaults to base_path' do
+      chapters = Book.first.chapters
+      chapters.first.title.should_not == chapters.first.base_path
+      chapters.last.title.should      == chapters.last.base_path
+    end
+
+  end
 end

@@ -10,8 +10,8 @@ class Twain::App
     Repo.all.to_json
   end
 
-  get '/api/book/:id' do |id|
-    repo = Repo.first(:id => id.to_i)
+  get '/api/book/:book_id' do |book_id|
+    repo = Repo.first(:id => book_id.to_i)
     halt 404 unless repo
     @api = Twain::API.new(git:    repo[:location],
                           prefix: '/tmp',
@@ -20,5 +20,13 @@ class Twain::App
     @api.current_book.to_json
   end
 
-  
+  get '/api/book/:book_id/chapters' do |book_id|
+    repo = Repo.first(:id => book_id.to_i)
+    halt 404 unless repo
+    @api = Twain::API.new(git:    repo[:location],
+                          prefix: '/tmp',
+                          user:   session[:user])
+    @api.current_book.chapters.to_json    
+  end
+
 end
