@@ -46,7 +46,7 @@ describe Twain::API do
 
   describe 'restricted areas' do
     def login(username, password) 
-      post '/authenticate', { username: username, password: password }
+      post '/login', { username: username, password: password }
     end
 
     before :each do
@@ -69,9 +69,9 @@ describe Twain::API do
     end
 
     it 'should not block api if logged in' do
-      username, password = 'apiuserz111', 'apipasswordz123'
+      username, password = 'testuser', 'temp'
       Helper.create_user(username, password)
-      login('apiuserz111', 'apipasswordz123')
+      login(username, password)
       get '/api/book'
       last_response.status.should == 200
     end

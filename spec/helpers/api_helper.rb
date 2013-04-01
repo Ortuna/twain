@@ -5,7 +5,13 @@ module Helper
       "#{Padrino.root}/tmp"
     end
 
+    def clear_all
+      clean_repos
+      clean_users
+    end
+
     def setup_api(git_path, username = 'apiuser', password = 'password')
+      clear_all   
       create_user(username, password)
       Twain::API.new(git: git_path,
                   prefix: tmp_prefix,

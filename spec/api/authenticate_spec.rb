@@ -3,11 +3,13 @@ describe 'authentication' do
     clear_cookies
     Helper.clean_users
     Helper.create_user('apiuser', 'apipassword')
+
+    @end_point = '/login'
   end
 
   it 'authenticates a user correctly' do
     params = { username: 'apiuser', password: 'apipassword' }
-    post '/authenticate', params
+    post @end_point, params
 
     user = Helper.parse_json(last_response.body)
     user["username"].should == params[:username]
@@ -17,13 +19,13 @@ describe 'authentication' do
 
   it 'denies login with invalid username and pass' do
     params = { username: 'apiuser', password: 'apipasswordzzz' }
-    post '/authenticate', params
+    post @end_point, params
 
     last_response.should_not be_ok
   end
 
   it 'denies without params' do
-    post '/authenticate'
+    post @end_point
     last_response.should_not be_ok
   end
 end

@@ -1,6 +1,6 @@
 class Twain::App
 
-  post '/authenticate', :csrf_protection => false do
+  post '/login', :csrf_protection => false do
     username = params[:username] || nil
     password = params[:password] || nil
     user     = authenticate_user(username, password)
