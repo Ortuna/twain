@@ -14,6 +14,6 @@ class Twain::App
   
   private
   def authenticate_user(username, password)
-    User.authenticate(username, password).tap { |user| session['user'] = user }
+    User.authenticate(username, password).tap { |user| session[:user] = user }
   end
 end

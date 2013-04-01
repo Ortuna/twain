@@ -1,16 +1,25 @@
 module Twain
   class API
-    attr_reader :git_location, :options, :book, :user
+    attr_reader :git_location, :options, 
+                :book,         :user,
+                :current_book
 
     def initialize(opts = {})
       @options      = defaults.merge(opts)
       @git_location = options[:git] || nil
       @username     = options[:username] || nil
       @password     = options[:password] || nil
-      @book         = ::Book
+      @user         = options[:user] || nil
 
-      authenticate!
+      user ? verify_user! : authenticate! 
       setup_datamapper
+
+      @book         = ::Book
+      @current_book = book.first
+    end
+
+    def verify_user!
+      raise 'Invalid user object' unless user[:id]
     end
 
     def authenticate!(username = @username, password = @password)

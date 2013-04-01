@@ -42,6 +42,25 @@ describe Twain::API do
                   password: 'unknownpassword')
       }.to raise_error
     end
+
+    it 'allows api with a user object' do
+      Helper.clean_users
+      user = Helper.create_user('username', 'password')
+      expect {
+        Twain::API.new(git: @git_path,
+                    prefix: Helper.tmp_prefix,
+                      user: user)
+      }.to_not raise_error
+    end
+
+    it 'fails with a bad user' do
+      user = {}
+      expect {
+        Twain::API.new(git: @git_path,
+                    prefix: Helper.tmp_prefix,
+                      user: user)
+      }.to raise_error
+    end
   end
 
   describe 'restricted areas' do
@@ -55,7 +74,7 @@ describe Twain::API do
     end
 
     it 'should block api to logged in users only' do
-      get '/api/book'
+      get '/api/books'
       last_response.status.should == 403
     end
 
@@ -64,7 +83,7 @@ describe Twain::API do
       Helper.create_user(username, password)
       login(username, 'password')
 
-      get '/api/book'
+      get '/api/books'
       last_response.status.should == 403
     end
 
@@ -72,7 +91,7 @@ describe Twain::API do
       username, password = 'testuser', 'temp'
       Helper.create_user(username, password)
       login(username, password)
-      get '/api/book'
+      get '/api/books'
       last_response.status.should == 200
     end
     

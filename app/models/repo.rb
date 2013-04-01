@@ -3,6 +3,7 @@ class Repo
 
   property :id,       Serial
   property :location, String
+  property :name,     String
 
   belongs_to :user, 'User'
 end
