@@ -38,6 +38,10 @@ describe Twain::API do
     login(username, password)
   end
 
+  after :each do
+    FileUtils.rm_rf Helper.tmp_prefix
+  end
+
   describe 'book' do
     it 'rejects unknown books' do
       post "/api/book/xyz", {book: {} }
@@ -83,6 +87,24 @@ describe Twain::API do
 
       post post_url, { chapter: { base_path: 'xyzpath' } }
       last_response.should_not be_ok      
+    end
+
+    it 'creates new chapters' do
+      chapter = Chapter.new
+      chapter.base_path = 'new_chapter'
+      post_url =  "/api/book/#{get_repo_list.first['id']}/chapters"
+
+      post post_url, {chapter: chapter.to_json}
+      last_response.should be_ok
+
+      get_chapter_path = "/api/book/#{get_repo_list.first['id']}/chapters"
+      chapters = get_json_from(get_chapter_path)
+      has_new_chapter = false
+      chapters.each do |chapter| 
+        has_new_chapter = true if chapter["base_path"] == 'new_chapter'
+      end
+
+      has_new_chapter.should == true
     end
   end#chapter
 

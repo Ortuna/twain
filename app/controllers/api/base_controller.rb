@@ -5,7 +5,8 @@ class Twain::App
   end
 
   def create_api(repo_location, user)
-    Twain::API.new(git: repo_location, prefix: '/tmp', user: user)
+    tmp_prefix = "#{Padrino.root}/tmp/repos"
+    Twain::API.new(git: repo_location, prefix: tmp_prefix, user: user)
   end
 
   def parse_json(json)

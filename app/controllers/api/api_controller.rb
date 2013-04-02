@@ -41,6 +41,20 @@ class Twain::App
     book.save if book.dirty?
   end
 
+  post '/api/book/:book_id/chapters', :csrf_protection => false do |book_id|
+    repo      = find_repo(book_id)
+    api       = create_api(repo[:location], session[:user])
+    book      = api.current_book
+    post_chapter = parse_json(params["chapter"])
+
+    halt(422) if post_chapter.empty?
+
+    chapter = Chapter.new
+    chapter.base_path = post_chapter["base_path"]
+    chapter.book = book
+    halt(422) unless chapter.save
+  end
+
   post '/api/book/:book_id/chapter/:chapter_id', 
     :csrf_protection => false do |book_id, chapter_id|
     repo      = find_repo(book_id)

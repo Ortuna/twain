@@ -2,7 +2,7 @@ module Helper
   class << self
 
     def tmp_prefix
-      "#{Padrino.root}/tmp"
+      "#{Padrino.root}/tmp/repos"
     end
 
     def clear_all
