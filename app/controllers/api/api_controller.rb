@@ -98,4 +98,17 @@ class Twain::App
     section.save if section.dirty?
   end
 
+  delete '/api/book/:book_id/chapter/:chapter_id/section/:section_id' do |book_id, chapter_id, section_id|
+    repo      = find_repo(book_id)
+    api       = create_api(repo[:location], session[:user])
+    book      = api.current_book
+
+    chapter   = book.chapters.first(:base_path => chapter_id)
+    halt(404) unless chapter
+   
+    section = chapter.sections.first(:base_path => section_id)
+    halt(404) unless section
+
+    halt(422) if section.destroy == false
+  end
 end

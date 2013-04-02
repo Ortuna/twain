@@ -148,6 +148,23 @@ describe Twain::API do
 
       section["title"].should == new_title
     end
+
+    it 'deletes a section' do
+      chapter   = get_first_chapter
+      section_list_url =  "/api/book/#{get_repo_list.first['id']}"
+      section_list_url << "/chapter/#{chapter['base_path']}/sections"
+      section_id = get_json_from(section_list_url).first['base_path']
+
+      section_url =  "/api/book/#{get_repo_list.first['id']}"
+      section_url << "/chapter/#{chapter['base_path']}/section/#{section_id}"
+
+      delete section_url
+      last_response.should be_ok
+
+      get_json_from(section_list_url).inject([]) do |memo, chapter| 
+        memo.tap { |m| m << chapter["base_path"] }
+      end.should_not include(section_id)
+    end
   end
 
 end
