@@ -11,21 +11,25 @@ class Twain::App
     Repo.all.to_json
   end
 
-  get '/api/book/:book_id' do |book_id|
+end
+
+Twain::App.controllers '/api/book' do
+
+  get ':book_id' do |book_id|
     setup_api(book_id)
     api.current_book.to_json
   end
 
-  get '/api/book/:book_id/chapters' do |book_id|
+  get ':book_id/chapters' do |book_id|
     setup_api(book_id)
     api.current_book.chapters.to_json
   end
 
-  get '/api/book/:book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|
+  get ':book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|
     find_chapter(book_id, chapter_id).sections.to_json
   end
 
-  post '/api/book/:book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|
+  post ':book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|
     chapter      = find_chapter(book_id, chapter_id)
     post_section = parse_json(params["section"])
 
@@ -36,7 +40,7 @@ class Twain::App
     invalid_entity unless section.save
   end
 
-  post '/api/book/:book_id' do |book_id|
+  post ':book_id' do |book_id|
     setup_api(book_id)
     post_book = parse_json(params["book"])
 
@@ -46,7 +50,7 @@ class Twain::App
     book.save if book.dirty?
   end
 
-  post '/api/book/:book_id/chapters' do |book_id|
+  post ':book_id/chapters' do |book_id|
     setup_api(book_id)
     post_chapter = parse_json(params["chapter"])
 
@@ -58,7 +62,7 @@ class Twain::App
     invalid_entity unless chapter.save
   end
 
-  post '/api/book/:book_id/chapter/:chapter_id' do |book_id, chapter_id|
+  post ':book_id/chapter/:chapter_id' do |book_id, chapter_id|
     setup_api(book_id)
     post_chapter = parse_json(params["chapter"])
 
@@ -69,13 +73,13 @@ class Twain::App
     chapter.save if chapter.dirty?
   end
 
-  delete '/api/book/:book_id/chapter/:chapter_id' do |book_id, chapter_id|
+  delete ':book_id/chapter/:chapter_id' do |book_id, chapter_id|
     setup_api(book_id)
     chapter = book.chapters.first(:base_path => chapter_id)
     invalid_entity if chapter.destroy == false
   end
 
-  post '/api/book/:book_id/chapter/:chapter_id/section/:section_id' do |book_id, chapter_id, section_id|
+  post ':book_id/chapter/:chapter_id/section/:section_id' do |book_id, chapter_id, section_id|
     setup_api(book_id)
     section      = find_section(book_id, chapter_id, section_id)
     post_section = parse_json(params["section"])
@@ -85,7 +89,7 @@ class Twain::App
     section.save if section.dirty?
   end
 
-  delete '/api/book/:book_id/chapter/:chapter_id/section/:section_id' do |book_id, chapter_id, section_id|
+  delete ':book_id/chapter/:chapter_id/section/:section_id' do |book_id, chapter_id, section_id|
     setup_api(book_id)
     section = find_section(book_id, chapter_id, section_id)
     invalid_entity if section.destroy == false
