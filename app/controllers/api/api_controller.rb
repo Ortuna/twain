@@ -1,6 +1,6 @@
 class Twain::App
   attr_reader :api
-  
+
   def setup_request(book_id)
     repo = find_repo(book_id)
     create_api(repo[:location], session[:user])
@@ -53,6 +53,16 @@ class Twain::App
     find_chapter(book_id, chapter_id).sections.to_json
   end
 
+  post '/api/book/:book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|
+    chapter      = find_chapter(book_id, chapter_id)
+    post_section = parse_json(params["section"])
+
+    section = Section.new
+    section.base_path = post_section["base_path"]
+    section.chapter   = chapter
+
+    invalid_entity unless section.save
+  end
 
   post '/api/book/:book_id' do |book_id|
     setup_api(book_id)

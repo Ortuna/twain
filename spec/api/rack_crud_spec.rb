@@ -109,8 +109,7 @@ describe Twain::API do
       chapters_path = "/api/book/#{get_repo_list.first['id']}/chapters"
 
       #create a chapter
-      chapter           = Chapter.new
-      chapter.base_path = chapter_id
+      chapter = { :base_path => chapter_id }
       post chapters_path, {chapter: chapter.to_json}
       last_response.should be_ok
 
@@ -164,6 +163,21 @@ describe Twain::API do
       get_json_from(section_list_url).inject([]) do |memo, chapter| 
         memo.tap { |m| m << chapter["base_path"] }
       end.should_not include(section_id)
+    end
+
+    it 'creates a section' do
+      chapter   = get_first_chapter
+      sections_url =  "/api/book/#{get_repo_list.first['id']}"
+      sections_url << "/chapter/#{chapter['base_path']}/sections"
+
+      section_id = "example.md #{Time.now}"
+      section    = {:base_path => section_id}
+
+      post sections_url, { section: section.to_json }
+      get_json_from(sections_url).inject([]) do |memo, section| 
+        memo.tap { |m| m << section["base_path"] }
+      end.should include(section_id)
+
     end
   end
 
