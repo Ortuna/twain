@@ -174,9 +174,13 @@ describe Twain::API do
       section    = {:base_path => section_id}
 
       post sections_url, { section: section.to_json }
+      last_response.should be_ok
       get_json_from(sections_url).inject([]) do |memo, section| 
         memo.tap { |m| m << section["base_path"] }
       end.should include(section_id)
+
+      post sections_url, { section: {}.to_json }
+      last_response.should_not be_ok
 
     end
   end
