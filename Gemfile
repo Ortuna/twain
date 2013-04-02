@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'padrino', '0.11.0'
+gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 gem 'multi_json'
 gem 'rake'
 

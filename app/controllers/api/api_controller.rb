@@ -28,7 +28,7 @@ class Twain::App
   end
 
 
-  post '/api/book/:book_id', :csrf_protection => false do |book_id|
+  post '/api/book/:book_id' do |book_id|
     repo      = find_repo(book_id)
     api       = create_api(repo[:location], session[:user])
     book      = api.current_book
@@ -41,10 +41,10 @@ class Twain::App
     book.save if book.dirty?
   end
 
-  post '/api/book/:book_id/chapters', :csrf_protection => false do |book_id|
-    repo      = find_repo(book_id)
-    api       = create_api(repo[:location], session[:user])
-    book      = api.current_book
+  post '/api/book/:book_id/chapters' do |book_id|
+    repo         = find_repo(book_id)
+    api          = create_api(repo[:location], session[:user])
+    book         = api.current_book
     post_chapter = parse_json(params["chapter"])
 
     halt(422) if post_chapter.empty?
@@ -55,13 +55,12 @@ class Twain::App
     halt(422) unless chapter.save
   end
 
-  post '/api/book/:book_id/chapter/:chapter_id', 
-    :csrf_protection => false do |book_id, chapter_id|
-    repo      = find_repo(book_id)
-    api       = create_api(repo[:location], session[:user])
-    book      = api.current_book
-
+  post '/api/book/:book_id/chapter/:chapter_id' do |book_id, chapter_id|
+    repo         = find_repo(book_id)
+    api          = create_api(repo[:location], session[:user])
+    book         = api.current_book
     post_chapter = parse_json(params["chapter"])
+
     halt(422) unless post_chapter
     halt(422) if post_chapter.empty?
 
@@ -72,8 +71,16 @@ class Twain::App
     chapter.save if chapter.dirty?
   end
 
-  post '/api/book/:book_id/chapter/:chapter_id/section/:section_id',
-    :csrf_protection => false do |book_id, chapter_id, section_id|
+  delete '/api/book/:book_id/chapter/:chapter_id' do |book_id, chapter_id|
+    repo    = find_repo(book_id)
+    api     = create_api(repo[:location], session[:user])
+    book    = api.current_book
+    chapter = book.chapters.first(:base_path => chapter_id)
+
+    halt(422) if chapter.destroy == false
+  end
+
+  post '/api/book/:book_id/chapter/:chapter_id/section/:section_id' do |book_id, chapter_id, section_id|
     repo      = find_repo(book_id)
     api       = create_api(repo[:location], session[:user])
     book      = api.current_book

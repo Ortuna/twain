@@ -90,22 +90,41 @@ describe Twain::API do
     end
 
     it 'creates new chapters' do
+      chapters_path =  "/api/book/#{get_repo_list.first['id']}/chapters"
+
       chapter = Chapter.new
       chapter.base_path = 'new_chapter'
-      post_url =  "/api/book/#{get_repo_list.first['id']}/chapters"
-
-      post post_url, {chapter: chapter.to_json}
+      
+      post chapters_path, {chapter: chapter.to_json}
       last_response.should be_ok
 
-      get_chapter_path = "/api/book/#{get_repo_list.first['id']}/chapters"
-      chapters = get_json_from(get_chapter_path)
-      has_new_chapter = false
-      chapters.each do |chapter| 
-        has_new_chapter = true if chapter["base_path"] == 'new_chapter'
-      end
-
-      has_new_chapter.should == true
+      get_json_from(chapters_path).inject([]) do |memo, chapter| 
+        memo.tap { |m| m << chapter["base_path"] }
+      end.should include('new_chapter')
     end
+
+    it 'deletes a chapter' do
+      chapter_id    = 'cool_chapter'
+      delete_url    = "/api/book/#{get_repo_list.first['id']}/chapter/#{chapter_id}"
+      chapters_path = "/api/book/#{get_repo_list.first['id']}/chapters"
+
+      #create a chapter
+      chapter           = Chapter.new
+      chapter.base_path = chapter_id
+      post chapters_path, {chapter: chapter.to_json}
+      last_response.should be_ok
+
+      #delete it
+      delete delete_url
+
+      last_response.should be_ok
+
+      get_json_from(chapters_path).inject([]) do |memo, chapter| 
+        memo.tap { |m| m << chapter["base_path"] }
+      end.should_not include(chapter_id)
+
+    end
+
   end#chapter
 
   describe 'sections' do
