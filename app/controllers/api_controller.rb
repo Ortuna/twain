@@ -79,7 +79,9 @@ Twain::App.controllers '/api/book' do
     invalid_entity if chapter.destroy == false
   end
 
-  post ':book_id/chapter/:chapter_id/section/:section_id' do |book_id, chapter_id, section_id|
+  post ':book_id/chapter/:chapter_id/section/:section_id' do |book_id, 
+                                                              chapter_id, 
+                                                              section_id|
     setup_api(book_id)
     section      = find_section(book_id, chapter_id, section_id)
     post_section = parse_json(params["section"])
@@ -89,7 +91,9 @@ Twain::App.controllers '/api/book' do
     section.save if section.dirty?
   end
 
-  delete ':book_id/chapter/:chapter_id/section/:section_id' do |book_id, chapter_id, section_id|
+  delete ':book_id/chapter/:chapter_id/section/:section_id' do |book_id, 
+                                                                chapter_id, 
+                                                                section_id|
     setup_api(book_id)
     section = find_section(book_id, chapter_id, section_id)
     invalid_entity if section.destroy == false
