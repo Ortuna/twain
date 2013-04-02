@@ -3,7 +3,7 @@ begin
 
   spec_tasks = Dir['spec/*/'].map do |d| 
     next if d == 'spec/fixture/' || d == 'spec/helpers/'
-    File.basename(d);
+    File.basename(d)
   end.compact!
 
 
