@@ -40,12 +40,12 @@ class Twain::App
   end
 
   get '/api/book/:book_id' do |book_id|
-    @api = setup_request(book_id)
+    setup_api(book_id)
     api.current_book.to_json
   end
 
   get '/api/book/:book_id/chapters' do |book_id|
-    @api = setup_request(book_id)
+    setup_api(book_id)
     api.current_book.chapters.to_json
   end
 
