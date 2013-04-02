@@ -105,7 +105,7 @@ describe Twain::API do
 
     it 'deletes a chapter' do
       chapter_id    = 'cool_chapter'
-      delete_url    = "/api/book/#{get_repo_list.first['id']}/chapter/#{chapter_id}"
+      url    = "/api/book/#{get_repo_list.first['id']}/chapter/#{chapter_id}"
       chapters_path = "/api/book/#{get_repo_list.first['id']}/chapters"
 
       #create a chapter
@@ -114,7 +114,7 @@ describe Twain::API do
       last_response.should be_ok
 
       #delete it
-      delete delete_url
+      delete url
 
       last_response.should be_ok
 
@@ -135,12 +135,12 @@ describe Twain::API do
 
       section = get_json_from(section_list_url).first
 
-      post_url =  "/api/book/#{get_repo_list.first['id']}"
-      post_url << "/chapter/#{chapter['base_path']}/section/#{section['base_path']}"
+      url =  "/api/book/#{get_repo_list.first['id']}"
+      url << "/chapter/#{chapter['base_path']}/section/#{section['base_path']}"
 
       section["title"] = new_title
 
-      post post_url, { section: section.to_json }
+      post url, { section: section.to_json }
       last_response.should be_ok
 
       section = get_json_from(section_list_url).first
