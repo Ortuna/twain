@@ -17,6 +17,10 @@ class Twain::App
     halt(403, 'login required') unless session[:user]
   end
 
+  def not_found
+    halt 404
+  end
+
   def update_attributes(model, attributes)
     model.attributes.each do |attribute, value|
       key = attribute.to_s
