@@ -1,8 +1,4 @@
-class Twain::App
-
-  def find_repo(book_id)
-    Repo.first(:id => book_id.to_i) || halt(404)
-  end
+module Twain::Common
 
   def create_api(repo_location, user)
     tmp_prefix = "#{Padrino.root}/tmp/repos"
@@ -34,5 +30,5 @@ class Twain::App
         model.send("#{attribute}=", attributes[key]) 
       end #if 
     end #each
-  end #def  
-end
+  end #def    
+end #module
