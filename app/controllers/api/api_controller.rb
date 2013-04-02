@@ -1,4 +1,5 @@
 class Twain::App
+  attr_reader :api
   
   def setup_request(book_id)
     repo = find_repo(book_id)

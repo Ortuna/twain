@@ -1,7 +1,5 @@
 class Twain::App
 
-  attr_reader :api
-
   def find_repo(book_id)
     Repo.first(:id => book_id.to_i) || halt(404)
   end
