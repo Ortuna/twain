@@ -1,5 +1,7 @@
 class Twain::App
 
+  attr_reader :api
+
   def find_repo(book_id)
     Repo.first(:id => book_id.to_i) || halt(404)
   end
@@ -19,6 +21,15 @@ class Twain::App
 
   def not_found
     halt 404
+  end
+
+  def invalid_entity
+    halt 422
+  end
+
+  def setup_request(book_id)
+    repo = find_repo(book_id)
+    @api = create_api(repo[:location], session[:user])
   end
 
   def update_attributes(model, attributes)
