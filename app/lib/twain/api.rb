@@ -6,10 +6,10 @@ module Twain
 
     def initialize(opts = {})
       @options      = defaults.merge(opts)
-      @git_location = options[:git] || nil
-      @username     = options[:username] || nil
-      @password     = options[:password] || nil
-      @user         = options[:user] || nil
+      @git_location = options[:git]
+      @username     = options[:username]
+      @password     = options[:password]
+      @user         = options[:user]
 
       user ? verify_user! : authenticate! 
       setup_datamapper

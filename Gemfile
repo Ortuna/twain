@@ -14,6 +14,7 @@ gem 'dm-serializer'
 gem 'bcrypt-ruby'
 gem 'jasmine'
 gem 'guard-jasmine'
+gem 'haml'
 
 group :development, :test do
   gem 'pry'
