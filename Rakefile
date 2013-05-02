@@ -6,9 +6,13 @@ PadrinoTasks.use(:database)
 PadrinoTasks.use(:datamapper)
 PadrinoTasks.init
 
-task :default => :spec
+task :default => :tests
+desc 'Run both javascript and rspec tests'
+task :tests do
+  Rake::Task["spec"].invoke
+  Rake::Task["guard:jasmine"].invoke
+end
 
-task :default => :jasmine
 begin
   require 'jasmine'
   load 'jasmine/tasks/jasmine.rake'
