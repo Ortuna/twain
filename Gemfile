@@ -12,6 +12,8 @@ gem 'dm-gitfs-adapter', path: '../dm-gitfs-adapter'
 gem 'dm-migrations'
 gem 'dm-serializer'
 gem 'bcrypt-ruby'
+gem 'jasmine'
+gem 'guard-jasmine'
 
 group :development, :test do
   gem 'pry'

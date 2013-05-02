@@ -1,0 +1,46 @@
+/*
+  CSS - Editor
+*/
+body {
+  background-color: #202020;
+  overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0; 
+  max-width: 100%;
+  width:100%;
+}
+
+.markdown,
+.preview {
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+  overflow-y: scroll;
+  position: absolute;
+  top:0px;
+}
+
+.ace_text-layer {
+  padding:5px;
+}
+
+.markdown.ace_editor {
+  font-size: 13px;
+  line-height: normal;
+  left:0px;
+  padding: 1px;
+}
+
+.markdown .ace_gutter {
+  display: none;
+}
+
+
+
+.preview {
+  background-color: #FFF;
+  right:0px;
+}

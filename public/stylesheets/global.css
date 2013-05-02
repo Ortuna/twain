@@ -1,0 +1,101 @@
+/*
+  Reset
+*/
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+}
+
+html {
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+/*
+  CSS - Everything
+*/
+body {
+  background-color: #fff;
+  line-height: 1.25em;
+  font-family: "ff-tisa-web-pro",serif;
+  font-size:115%;
+  color:#222f;
+} 
+
+h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 3rem;
+  font-family: adelle, serif;
+  text-align: center;
+}
+
+h1::after{
+  content: "";
+  width: 100px;
+  left: 50%;
+  margin-left: -50px;
+  border-bottom: 1px solid #eeeeee;
+  top: 100%;
+  position: absolute;
+  margin-top: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+h3 {
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+}
+
+h4 {
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+}
+
+h5 {
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+}
+
+h6 {
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+}
+
+p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+ul,
+ol {
+  display: block;
+  list-style-type: disc;
+  padding: 1em;
+  margin-left: .5em;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+.container {
+     margin: 0 auto;
+    padding: 1.5rem 1rem;
+   position: relative;
+  max-width: 80%;
+}
