@@ -1,19 +1,17 @@
 class Twain::App
-
   include Twain::Common
   include Twain::Util
 
   before do
     check_login if request.path_info[/\A\/api/]
   end
-
-  get '/api/books' do
-    Repo.all.to_json
-  end
-
 end
 
-Twain::App.controllers '/api/book' do
+Twain::App.controllers '/api/books' do
+
+  get '/' do
+    Repo.all.to_json
+  end
 
   get ':book_id' do |book_id|
     setup_api(book_id)

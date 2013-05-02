@@ -10,6 +10,10 @@ describe Twain::API do
     Helper.parse_json(last_response.body)
   end
 
+  def api_prefix
+    "/api/books"
+  end
+
   before :each do
     clear_cookies
     Helper.clear_all
@@ -27,14 +31,14 @@ describe Twain::API do
   end
 
   it 'gets a list of books' do
-    get '/api/books'
+    get api_prefix
     last_response.should be_ok
     books = Helper.parse_json(last_response.body)
     books.first["location"].should_not be_nil
   end
 
   it 'fails on an invalid book' do
-    get "/api/book/das_book"
+    get "#{api_prefix}/das_book"
     last_response.status.should == 404
   end
 
@@ -42,7 +46,7 @@ describe Twain::API do
     book_id = get_repo_list.first["id"]
     book_id.should_not be_nil
 
-    get "/api/book/#{book_id}"
+    get "#{api_prefix}/#{book_id}"
     last_response.should be_ok
 
     book = Helper.parse_json(last_response.body)
@@ -53,7 +57,7 @@ describe Twain::API do
     book_id = get_repo_list.first["id"]
     book_id.should_not be_nil
 
-    get "/api/book/#{book_id}/chapters"
+    get "#{api_prefix}/#{book_id}/chapters"
     last_response.should be_ok
 
     chapters = Helper.parse_json(last_response.body)
@@ -65,10 +69,10 @@ describe Twain::API do
   it 'gets all the sections on a book and chapter' do
     book_id    = get_repo_list.first["id"]
 
-    get "/api/book/#{book_id}/chapters"
+    get "#{api_prefix}/#{book_id}/chapters"
     chapter_id = Helper.parse_json(last_response.body).first["base_path"]
 
-    get "/api/book/#{book_id}/chapter/#{chapter_id}/sections"
+    get "#{api_prefix}/#{book_id}/chapter/#{chapter_id}/sections"
     last_response.should be_ok
 
     sections = Helper.parse_json(last_response.body)
