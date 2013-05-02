@@ -33,4 +33,5 @@ Padrino.configure_apps do
 end
 
 # Mounts the core application for this project
-Padrino.mount('Twain::App', :app_file => Padrino.root('app/app.rb')).to('/')
+Padrino.mount('FrontEnd::App', :app_file => Padrino.root('apps/front_end/app.rb')).to('/')
+Padrino.mount('API::App', :app_file => Padrino.root('apps/api/app.rb')).to('/')

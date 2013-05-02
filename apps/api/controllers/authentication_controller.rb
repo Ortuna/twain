@@ -1,4 +1,4 @@
-class Twain::App
+class API::App
 
   post '/login' do
     username = params[:username] || nil

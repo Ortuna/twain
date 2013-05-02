@@ -34,7 +34,7 @@ Padrino::Logger::Config[:development][:log_level]  = :devel
 # Add your before (RE)load hooks here
 #
 Padrino.before_load do
-  Padrino.dependency_paths << "#{Padrino.root}/app/**/*.rb"
+  Padrino.dependency_paths << "#{Padrino.root}/apps/**/*.rb"
 end
 
 ##

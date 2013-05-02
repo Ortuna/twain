@@ -1,4 +1,4 @@
-class Twain::App
+class API::App
   include Twain::Common
   include Twain::Util
 
@@ -7,7 +7,7 @@ class Twain::App
   end
 end
 
-Twain::App.controllers '/api/books' do
+API::App.controllers '/api/books' do
 
   get '/' do
     Repo.all.to_json

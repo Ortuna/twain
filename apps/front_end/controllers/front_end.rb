@@ -1,4 +1,4 @@
-class Twain::App
+class FrontEnd::App
   layout :global
 
   get :demo do

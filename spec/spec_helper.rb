@@ -12,7 +12,7 @@ RSpec.configure do |conf|
 end
 
 def app
-  Twain::App.tap { |app|  }
+  API::App.tap { |app|  }
 end
 
 Dir["#{SPEC_PATH}/helpers/**/*.rb"].each do |helper|

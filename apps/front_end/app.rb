@@ -1,4 +1,4 @@
-module Twain
+module FrontEnd
   class App < Padrino::Application
     register Padrino::Rendering
     register Padrino::Helpers
