@@ -1,5 +1,6 @@
 class API::App
 
+  #TODO: Remove me!
   get :login do 
     session[:user] = User.first
   end
