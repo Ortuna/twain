@@ -1,6 +1,7 @@
 <%= javascript_include_tag 'lib/jquery-1.9.1.min.js' %>
 <%= javascript_include_tag 'http://builds.emberjs.com.s3.amazonaws.com/handlebars-1.0.0-rc.3.js' %>
 <%= javascript_include_tag 'http://builds.emberjs.com/ember-latest.js' %>
+<%= javascript_include_tag 'http://builds.emberjs.com/ember-data-latest.js' %>
 
 
 <script type="text/javascript">
@@ -15,25 +16,26 @@
     redirect: function() { this.transitionTo('books'); }
   });
 
-  App.Book = Ember.Object.extend({});
+  App.BooksRoute = Ember.Route.extend({
+    model: function(){ return App.Book.find(); }
+  })
+
+  DS.RESTAdapter.reopen({
+    namespace: 'api/v1'
+  });
+
+  App.Store = DS.Store.extend({
+    revision: 12,
+    adapter: DS.RESTAdapter.create()
+  });
+
+  App.Book = DS.Model.extend({
+    location: DS.attr('string'),
+    name: DS.attr('string'),
+  });
+
 
   App.BooksController = Ember.ArrayController.extend();
-  App.booksController = App.BooksController.create();
-  
-  for(var i = 0; i < 3 ; i++) {
-    book = App.Book.create();
-    book.set('title', 'abc ' + i);
-    book.set('author', 'email@xyz.com');
-    book.set('highlighted', true);
-    book.set('id', i);
-    App.booksController.pushObject(book);
-  }
-
-  App.BooksView = Ember.View.extend({});
-
-  App.BookView = Ember.View.extend({});
-
-
 </script>
 
 <script type="text/x-handlebars">
@@ -43,12 +45,8 @@
 
 <script type="text/x-handlebars" data-template-name="books">
   <ul>
-  {{#each book in App.booksController}}
-    {{render 'book' book}}
+  {{#each controller}}
+    <li>{{#linkTo 'book' this}} {{name}} {{/linkTo}}</li>
   {{/each}}
   </ul>
-</script>
-
-<script type="text/x-handlebars" data-template-name="book">
-  <li>{{#linkTo 'book' book}} {{title}} {{/linkTo}}</li>
 </script>

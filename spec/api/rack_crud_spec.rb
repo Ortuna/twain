@@ -6,15 +6,15 @@ describe Twain::API do
   end
 
   def get_repo_list
-    get_json_from api_prefix
+    get_json_from(api_prefix)["books"]
   end
 
   def get_first_book
-    get_json_from "#{api_prefix}/#{get_repo_list.first["id"]}"
+    get_json_from("#{api_prefix}/#{get_repo_list.first["id"]}")["book"]
   end
 
   def get_first_chapter
-    get_json_from("#{api_prefix}/#{get_repo_list.first["id"]}/chapters").first
+    get_json_from("#{api_prefix}/#{get_repo_list.first["id"]}/chapters")["chapters"].first
   end
 
   def get_json_from(url)
@@ -98,7 +98,7 @@ describe Twain::API do
       post chapters_path, {chapter: chapter.to_json}
       last_response.should be_ok
 
-      get_json_from(chapters_path).inject([]) do |memo, chapter| 
+      get_json_from(chapters_path)["chapters"].inject([]) do |memo, chapter| 
         memo.tap { |m| m << chapter["base_path"] }
       end.should include('new_chapter')
     end
@@ -118,7 +118,7 @@ describe Twain::API do
 
       last_response.should be_ok
 
-      get_json_from(chapters_path).inject([]) do |memo, chapter| 
+      get_json_from(chapters_path)["chapters"].inject([]) do |memo, chapter| 
         memo.tap { |m| m << chapter["base_path"] }
       end.should_not include(chapter_id)
 
@@ -133,7 +133,7 @@ describe Twain::API do
       section_list_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
       section_list_url << "/chapter/#{chapter['base_path']}/sections"
 
-      section = get_json_from(section_list_url).first
+      section = get_json_from(section_list_url)["sections"].first
 
       url =  "#{api_prefix}/#{get_repo_list.first['id']}"
       url << "/chapter/#{chapter['base_path']}/section/#{section['base_path']}"
@@ -143,7 +143,7 @@ describe Twain::API do
       post url, { section: section.to_json }
       last_response.should be_ok
 
-      section = get_json_from(section_list_url).first
+      section = get_json_from(section_list_url)["sections"].first
 
       section["title"].should == new_title
     end
@@ -152,7 +152,7 @@ describe Twain::API do
       chapter   = get_first_chapter
       section_list_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
       section_list_url << "/chapter/#{chapter['base_path']}/sections"
-      section_id = get_json_from(section_list_url).first['base_path']
+      section_id = get_json_from(section_list_url)["sections"].first['base_path']
 
       section_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
       section_url << "/chapter/#{chapter['base_path']}/section/#{section_id}"
@@ -160,7 +160,7 @@ describe Twain::API do
       delete section_url
       last_response.should be_ok
 
-      get_json_from(section_list_url).inject([]) do |memo, chapter| 
+      get_json_from(section_list_url)["sections"].inject([]) do |memo, chapter| 
         memo.tap { |m| m << chapter["base_path"] }
       end.should_not include(section_id)
     end
@@ -175,7 +175,7 @@ describe Twain::API do
 
       post sections_url, { section: section.to_json }
       last_response.should be_ok
-      get_json_from(sections_url).inject([]) do |memo, section| 
+      get_json_from(sections_url)["sections"].inject([]) do |memo, section| 
         memo.tap { |m| m << section["base_path"] }
       end.should include(section_id)
 

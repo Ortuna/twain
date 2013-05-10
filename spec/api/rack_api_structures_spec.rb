@@ -7,7 +7,7 @@ describe Twain::API do
 
   def get_repo_list
     get api_prefix
-    Helper.parse_json(last_response.body)
+    Helper.parse_json(last_response.body)["books"]
   end
 
   before :each do
@@ -29,7 +29,7 @@ describe Twain::API do
   it 'gets a list of books' do
     get api_prefix
     last_response.should be_ok
-    books = Helper.parse_json(last_response.body)
+    books = Helper.parse_json(last_response.body)["books"]
     books.first["location"].should_not be_nil
   end
 
@@ -44,8 +44,8 @@ describe Twain::API do
 
     get "#{api_prefix}/#{book_id}"
     last_response.should be_ok
+    book = Helper.parse_json(last_response.body)["book"]
 
-    book = Helper.parse_json(last_response.body)
     book["base_path"].should_not be_nil
   end
 
@@ -56,7 +56,7 @@ describe Twain::API do
     get "#{api_prefix}/#{book_id}/chapters"
     last_response.should be_ok
 
-    chapters = Helper.parse_json(last_response.body)
+    chapters = Helper.parse_json(last_response.body)["chapters"]
     chapters.count.should be > 1
 
     chapters.first['title'].should_not be_nil
@@ -66,12 +66,12 @@ describe Twain::API do
     book_id    = get_repo_list.first["id"]
 
     get "#{api_prefix}/#{book_id}/chapters"
-    chapter_id = Helper.parse_json(last_response.body).first["base_path"]
+    chapter_id = Helper.parse_json(last_response.body)["chapters"].first["base_path"]
 
     get "#{api_prefix}/#{book_id}/chapter/#{chapter_id}/sections"
     last_response.should be_ok
 
-    sections = Helper.parse_json(last_response.body)
+    sections = Helper.parse_json(last_response.body)["sections"]
     sections.first["metadata"]["title"].should_not be_nil
   end
 end

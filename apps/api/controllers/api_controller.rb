@@ -5,26 +5,36 @@ class API::App
   before :except => [:login, :logout] do
     check_login
   end
+
+  def to_json(object, root = false)
+    root = root.to_s if root
+    #TODO: deal with to_json => to_s conversion, should just be to_json
+    if object.respond_to? :each
+      ActiveModel::ArraySerializer.new(object, :root => root).as_json
+    else
+      { root => ActiveModel::DefaultSerializer.new(object).serializable_hash }
+    end.to_json
+  end
 end
 
 API::App.controllers :books do
 
   get :index do
-    Repo.all.to_json
+    to_json(Repo.all, :books)
   end
 
   get ':book_id' do |book_id|
     setup_api(book_id)
-    api.current_book.to_json
+    to_json(api.current_book, :book)
   end
 
   get ':book_id/chapters' do |book_id|
     setup_api(book_id)
-    api.current_book.chapters.to_json
+    to_json(api.current_book.chapters, :chapters)
   end
 
   get ':book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|
-    find_chapter(book_id, chapter_id).sections.to_json
+    to_json(find_chapter(book_id, chapter_id).sections, :sections)
   end
 
   post ':book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|

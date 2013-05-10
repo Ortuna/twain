@@ -3,7 +3,7 @@ class FrontEnd::App
 
   get :demo do
     @code = code
-    render :index
+    render :ember
   end
 
 def code
