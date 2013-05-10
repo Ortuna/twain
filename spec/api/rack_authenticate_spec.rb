@@ -36,7 +36,7 @@ describe 'authentication' do
     get '/books'
     last_response.should be_ok
 
-    get @logout_end_point
+    post @logout_end_point
     last_response.should be_ok
 
     get '/books'

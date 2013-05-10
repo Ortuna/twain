@@ -20,5 +20,5 @@ Dir["#{SPEC_PATH}/helpers/**/*.rb"].each do |helper|
 end
 
 def api_prefix
-  '/books'
+  Helper.api_prefix
 end

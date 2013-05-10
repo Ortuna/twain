@@ -22,5 +22,9 @@ module Helper
     def parse_json(json)
       MultiJson.load(json)
     end
+
+    def api_prefix
+      '/books'
+    end
   end
 end

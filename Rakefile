@@ -7,6 +7,7 @@ PadrinoTasks.use(:datamapper)
 PadrinoTasks.init
 
 task :default => :tests
+
 desc 'Run both javascript and rspec tests'
 task :tests do
   Rake::Task["spec"].invoke

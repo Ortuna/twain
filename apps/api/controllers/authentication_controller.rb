@@ -7,12 +7,14 @@ class API::App
     user ? user.to_json : halt(403, 'invalid login')
   end
 
-  get :logout do
+  get(:logout) { logout }
+  post(:logout) { logout }
+  
+  private
+  def logout
     session.clear
     'logged out'
   end
-  
-  private
   def authenticate_user(username, password)
     User.authenticate(username, password).tap { |user| session[:user] = user }
   end
