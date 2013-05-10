@@ -9,7 +9,7 @@ Bundler.require(:default, PADRINO_ENV)
 
 Padrino::Logger::Config[:development][:log_level]  = :devel
 Padrino.before_load do
-  Padrino.dependency_paths << "#{Padrino.root}/apps/**/*.rb"
+  # Padrino.dependency_paths << "#{Padrino.root}/apps/**/*.rb"
 end
 
 Padrino.after_load do

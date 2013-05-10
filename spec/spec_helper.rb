@@ -18,3 +18,7 @@ end
 Dir["#{SPEC_PATH}/helpers/**/*.rb"].each do |helper|
   require helper
 end
+
+def api_prefix
+  '/books'
+end

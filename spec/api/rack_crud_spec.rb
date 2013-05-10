@@ -5,10 +5,6 @@ describe Twain::API do
     post '/login', params
   end
 
-  def api_prefix
-    '/api/books'
-  end
-
   def get_repo_list
     get_json_from api_prefix
   end

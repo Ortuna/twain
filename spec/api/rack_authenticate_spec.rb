@@ -33,14 +33,13 @@ describe 'authentication' do
   it 'logs you out when visiting logout end point' do
     params = { username: 'apiuser', password: 'apipassword' }
     post @login_end_point, params
-
-    get '/api/books'
+    get '/books'
     last_response.should be_ok
 
     get @logout_end_point
     last_response.should be_ok
 
-    get '/api/books'
+    get '/books'
     last_response.should_not be_ok
   end
 end

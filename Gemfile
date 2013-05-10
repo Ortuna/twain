@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
+# gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
+gem 'padrino', :path => '~/Desktop/code/opensource/padrino-framework'
 gem 'multi_json'
 gem 'rake'
 
@@ -13,7 +14,7 @@ gem 'dm-migrations'
 gem 'dm-serializer'
 gem 'bcrypt-ruby'
 gem 'jasmine'
-gem 'guard-jasmine'
+gem 'guard-jasmine', :require => false
 gem 'haml'
 
 group :development, :test do

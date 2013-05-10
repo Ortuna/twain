@@ -74,7 +74,7 @@ describe Twain::API do
     end
 
     it 'should block api to logged in users only' do
-      get '/api/books'
+      get '/books'
       last_response.status.should == 403
     end
 
@@ -83,7 +83,7 @@ describe Twain::API do
       Helper.create_user(username, password)
       login(username, 'password')
 
-      get '/api/books'
+      get '/books'
       last_response.status.should == 403
     end
 
@@ -91,7 +91,7 @@ describe Twain::API do
       username, password = 'testuser', 'temp'
       Helper.create_user(username, password)
       login(username, password)
-      get '/api/books'
+      get '/books'
       last_response.status.should == 200
     end
     

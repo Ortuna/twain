@@ -2,14 +2,14 @@ class API::App
   include Twain::Common
   include Twain::Util
 
-  before do
-    check_login if request.path_info[/\A\/api/]
+  before :except => [:login, :logout] do
+    check_login
   end
 end
 
-API::App.controllers '/api/books' do
+API::App.controllers :books do
 
-  get '/' do
+  get :index do
     Repo.all.to_json
   end
 

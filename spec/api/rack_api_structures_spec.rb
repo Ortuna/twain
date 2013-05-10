@@ -6,12 +6,8 @@ describe Twain::API do
   end
 
   def get_repo_list
-    get '/api/books'
+    get api_prefix
     Helper.parse_json(last_response.body)
-  end
-
-  def api_prefix
-    "/api/books"
   end
 
   before :each do
