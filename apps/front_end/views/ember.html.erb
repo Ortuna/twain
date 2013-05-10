@@ -1,0 +1,54 @@
+<%= javascript_include_tag 'lib/jquery-1.9.1.min.js' %>
+<%= javascript_include_tag 'http://builds.emberjs.com.s3.amazonaws.com/handlebars-1.0.0-rc.3.js' %>
+<%= javascript_include_tag 'http://builds.emberjs.com/ember-latest.js' %>
+
+
+<script type="text/javascript">
+  App = Ember.Application.create();
+
+  App.Router.map(function() {
+    this.resource("books");
+    this.resource('book', { path: "books/:book_id"});
+  });
+
+  App.IndexRoute = Ember.Route.extend({
+    redirect: function() { this.transitionTo('books'); }
+  });
+
+  App.Book = Ember.Object.extend({});
+
+  App.BooksController = Ember.ArrayController.extend();
+  App.booksController = App.BooksController.create();
+  
+  for(var i = 0; i < 3 ; i++) {
+    book = App.Book.create();
+    book.set('title', 'abc ' + i);
+    book.set('author', 'email@xyz.com');
+    book.set('highlighted', true);
+    book.set('id', i);
+    App.booksController.pushObject(book);
+  }
+
+  App.BooksView = Ember.View.extend({});
+
+  App.BookView = Ember.View.extend({});
+
+
+</script>
+
+<script type="text/x-handlebars">
+  <h2>Layout</h2>
+  {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="books">
+  <ul>
+  {{#each book in App.booksController}}
+    {{render 'book' book}}
+  {{/each}}
+  </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="book">
+  <li>{{#linkTo 'book' book}} {{title}} {{/linkTo}}</li>
+</script>

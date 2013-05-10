@@ -1,5 +1,9 @@
 class API::App
 
+  get :login do 
+    session[:user] = User.first
+  end
+
   post :login do
     username = params[:username] || nil
     password = params[:password] || nil
