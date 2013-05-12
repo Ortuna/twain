@@ -35,11 +35,11 @@ API::App.controllers :books do
     to_json(api.current_book.chapters, :chapters)
   end
 
-  get ':book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|
+  get ':book_id/chapters/:chapter_id/sections' do |book_id, chapter_id|
     to_json(find_chapter(book_id, chapter_id).sections, :sections)
   end
 
-  post ':book_id/chapter/:chapter_id/sections' do |book_id, chapter_id|
+  post ':book_id/chapters/:chapter_id/sections' do |book_id, chapter_id|
     chapter      = find_chapter(book_id, chapter_id)
     post_section = parse_json(params["section"])
 
@@ -72,7 +72,7 @@ API::App.controllers :books do
     invalid_entity unless chapter.save
   end
 
-  post ':book_id/chapter/:chapter_id' do |book_id, chapter_id|
+  post ':book_id/chapters/:chapter_id' do |book_id, chapter_id|
     setup_api(book_id)
     post_chapter = parse_json(params["chapter"])
 
@@ -83,13 +83,13 @@ API::App.controllers :books do
     chapter.save if chapter.dirty?
   end
 
-  delete ':book_id/chapter/:chapter_id' do |book_id, chapter_id|
+  delete ':book_id/chapters/:chapter_id' do |book_id, chapter_id|
     setup_api(book_id)
     chapter = book.chapters.first(:base_path => chapter_id)
     invalid_entity if chapter.destroy == false
   end
 
-  post ':book_id/chapter/:chapter_id/section/:section_id' do |book_id, 
+  post ':book_id/chapters/:chapter_id/section/:section_id' do |book_id, 
                                                               chapter_id, 
                                                               section_id|
     setup_api(book_id)
@@ -101,7 +101,7 @@ API::App.controllers :books do
     section.save if section.dirty?
   end
 
-  delete ':book_id/chapter/:chapter_id/section/:section_id' do |book_id, 
+  delete ':book_id/chapters/:chapter_id/section/:section_id' do |book_id, 
                                                                 chapter_id, 
                                                                 section_id|
     setup_api(book_id)

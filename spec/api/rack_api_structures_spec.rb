@@ -68,7 +68,7 @@ describe Twain::API do
     get "#{api_prefix}/#{book_id}/chapters"
     chapter_id = Helper.parse_json(last_response.body)["chapters"].first["base_path"]
 
-    get "#{api_prefix}/#{book_id}/chapter/#{chapter_id}/sections"
+    get "#{api_prefix}/#{book_id}/chapters/#{chapter_id}/sections"
     last_response.should be_ok
 
     sections = Helper.parse_json(last_response.body)["sections"]

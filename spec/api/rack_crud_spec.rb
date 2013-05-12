@@ -68,7 +68,7 @@ describe Twain::API do
       chapter["title"] = new_title
 
       post_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
-      post_url << "/chapter/#{chapter['base_path']}"
+      post_url << "/chapters/#{chapter['base_path']}"
 
       post post_url, { chapter: chapter.to_json }
       last_response.should be_ok
@@ -105,7 +105,7 @@ describe Twain::API do
 
     it 'deletes a chapter' do
       chapter_id    = 'cool_chapter'
-      url    = "#{api_prefix}/#{get_repo_list.first['id']}/chapter/#{chapter_id}"
+      url    = "#{api_prefix}/#{get_repo_list.first['id']}/chapters/#{chapter_id}"
       chapters_path = "#{api_prefix}/#{get_repo_list.first['id']}/chapters"
 
       #create a chapter
@@ -131,12 +131,12 @@ describe Twain::API do
       new_title = "The now section #{Time.now}"
       chapter   = get_first_chapter
       section_list_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
-      section_list_url << "/chapter/#{chapter['base_path']}/sections"
+      section_list_url << "/chapters/#{chapter['base_path']}/sections"
 
       section = get_json_from(section_list_url)["sections"].first
 
       url =  "#{api_prefix}/#{get_repo_list.first['id']}"
-      url << "/chapter/#{chapter['base_path']}/section/#{section['base_path']}"
+      url << "/chapters/#{chapter['base_path']}/section/#{section['base_path']}"
 
       section["title"] = new_title
 
@@ -151,11 +151,11 @@ describe Twain::API do
     it 'deletes a section' do
       chapter   = get_first_chapter
       section_list_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
-      section_list_url << "/chapter/#{chapter['base_path']}/sections"
+      section_list_url << "/chapters/#{chapter['base_path']}/sections"
       section_id = get_json_from(section_list_url)["sections"].first['base_path']
 
       section_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
-      section_url << "/chapter/#{chapter['base_path']}/section/#{section_id}"
+      section_url << "/chapters/#{chapter['base_path']}/section/#{section_id}"
 
       delete section_url
       last_response.should be_ok
@@ -168,7 +168,7 @@ describe Twain::API do
     it 'creates a section' do
       chapter   = get_first_chapter
       sections_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
-      sections_url << "/chapter/#{chapter['base_path']}/sections"
+      sections_url << "/chapters/#{chapter['base_path']}/sections"
 
       section_id = "example.md #{Time.now}"
       section    = {:base_path => section_id}
