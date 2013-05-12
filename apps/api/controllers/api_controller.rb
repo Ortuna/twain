@@ -25,7 +25,9 @@ API::App.controllers :books do
 
   get ':book_id' do |book_id|
     setup_api(book_id)
-    to_json(api.current_book, :book)
+    book            = api.current_book.as_json
+    book[:chapters] = to_json(api.current_book.chapters)
+    {book: book}.to_json
   end
 
   get ':book_id/chapters' do |book_id|

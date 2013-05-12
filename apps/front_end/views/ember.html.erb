@@ -7,9 +7,56 @@
 <script type="text/javascript">
   App = Ember.Application.create();
 
+  DS.RESTAdapter.reopen({
+    namespace: 'api/v1',
+  });
+
+  App.Store = DS.Store.extend({
+    revision: 12,
+    adapter: DS.RESTAdapter.create({
+      bulkCommit: false,
+    })
+  });
+
+  App.Book = DS.Model.extend({
+    location: DS.attr('string'),
+    name: DS.attr('string'),
+    chapters: DS.hasMany('App.Chapter'),
+  });
+
+  App.Chapter = DS.Model.extend({
+    path: DS.attr('string'),
+    base_path: DS.attr('string'),
+    book_path: DS.attr('string'),
+    title: DS.attr('string'),
+    book: DS.belongsTo('App.Book'),
+  });
+
+  App.Section = DS.Model.extend({
+    path: DS.attr('string'),
+    base_path: DS.attr('string'),
+    book_path: DS.attr('string'),
+    title: DS.attr('string'),
+    book: DS.belongsTo('App.Book'),
+  });
+
+  App.Chapter.reopenClass({
+    findByBook: function(book_id) {
+      var chapters_url = "/api/v1/books/" + book_id + "/chapters";
+      return $.getJSON(chapters_url).then(function(data) {
+        var chapters = [];
+        data.chapters.forEach(function(element){
+          chapters.push(App.Chapter.createRecord(element));
+        });
+        return chapters;
+      });
+    },
+  });
+
   App.Router.map(function() {
-    this.resource("books");
-    this.resource('book', { path: "books/:book_id"});
+    this.resource('books', {path: 'books'},function(){
+      this.route('chapters', {path: ':book_id/chapters'});
+    });
   });
 
   App.IndexRoute = Ember.Route.extend({
@@ -17,36 +64,65 @@
   });
 
   App.BooksRoute = Ember.Route.extend({
+    setupController: function(controller, model) {
+      controller.set('books', false);
+      App.Book.find().then(function(books){
+        controller.set('books', books);  
+      });
+    },
     model: function(){ return App.Book.find(); }
-  })
-
-  DS.RESTAdapter.reopen({
-    namespace: 'api/v1'
   });
 
-  App.Store = DS.Store.extend({
-    revision: 12,
-    adapter: DS.RESTAdapter.create()
+  App.BooksController = Ember.ArrayController.extend({
+    filterByBook: function(book) {
+      this.transitionToRoute('books.chapters', {book_id: book.id});
+    }
   });
 
-  App.Book = DS.Model.extend({
-    location: DS.attr('string'),
-    name: DS.attr('string'),
+  App.BooksChaptersRoute = Ember.Route.extend({
+    setupController: function(controller, book){
+      if(book.book_id == undefined)
+        return;
+      controller.set('chapters', false);
+      App.Chapter.findByBook(1).then(function(chapters){
+        controller.set('chapters', chapters);
+      });
+      
+    },
+    renderTemplate: function() {
+      this.render('books.chapters', {into: 'application'});
+    },
+    serialize: function(model){
+      return {book_id: model.book_id};
+    },
+    model: function(params){
+      return App.Chapter.findByBook(params.book_id);
+    }
   });
 
-
-  App.BooksController = Ember.ArrayController.extend();
 </script>
 
-<script type="text/x-handlebars">
-  <h2>Layout</h2>
+<script type="text/x-handlebars" data-template-name="application">
+<h1>Application</h1>
   {{outlet}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="books">
   <ul>
-  {{#each controller}}
-    <li>{{#linkTo 'book' this}} {{name}} {{/linkTo}}</li>
-  {{/each}}
+  {{#if books}}
+    {{#each book in books}}
+      <li><a {{action 'filterByBook' book href="true"}}>{{book.name}}</a></li>   
+    {{/each}}
+  {{/if}}
+  </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="books/chapters">
+  <ul>
+  {{#if chapters}}
+    {{#each chapter in chapters}}
+      <li>{{chapter.title}}</li>
+    {{/each}}
+  {{/if}}
   </ul>
 </script>
