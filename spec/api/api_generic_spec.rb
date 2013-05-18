@@ -36,7 +36,7 @@ describe Mori::API do
 
     it 'fails with a invalid login' do
       expect {
-        Twain::API.new(git: @git_path,
+        Mori::API.new(git: @git_path,
                     prefix: Helper.tmp_prefix,
                   username: 'unkownapiuser',
                   password: 'unknownpassword')
@@ -47,7 +47,7 @@ describe Mori::API do
       Helper.clean_users
       user = Helper.create_user('username', 'password')
       expect {
-        Twain::API.new(git: @git_path,
+        Mori::API.new(git: @git_path,
                     prefix: Helper.tmp_prefix,
                       user: user)
       }.to_not raise_error
@@ -56,7 +56,7 @@ describe Mori::API do
     it 'fails with a bad user' do
       user = {}
       expect {
-        Twain::API.new(git: @git_path,
+        Mori::API.new(git: @git_path,
                     prefix: Helper.tmp_prefix,
                       user: user)
       }.to raise_error

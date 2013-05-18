@@ -28,18 +28,19 @@ body {
 }
 
 .markdown.ace_editor {
-  font-size: 13px;
-  line-height: normal;
+  font-size: 16px;
+  line-height: 20px;
   left:0px;
   padding: 1px;
+  font-family: "inconsolata";
 }
 
 .markdown .ace_content {
-  background-color: #303A44;
+  background-color: #000;
 }
 
 .markdown .ace_active-line {
-  background-color: #3B4858 !important;
+  background-color: #222 !important;
 }
 
 .markdown .ace_gutter {
