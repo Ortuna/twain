@@ -1,4 +1,4 @@
-module Twain::Util
+module Mori::Util
   attr_reader :api
 
   def setup_request(book_id)

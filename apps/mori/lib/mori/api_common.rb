@@ -1,8 +1,8 @@
-module Twain::Common
+module Mori::Common
 
   def create_api(repo_location, user)
     tmp_prefix = "#{Padrino.root}/tmp/repos"
-    Twain::API.new(git: repo_location, prefix: tmp_prefix, user: user)
+    Mori::API.new(git: repo_location, prefix: tmp_prefix, user: user)
   end
 
   def parse_json(json)

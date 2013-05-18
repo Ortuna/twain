@@ -1,6 +1,6 @@
-class FrontEnd::App
-  include Twain::Common
-  include Twain::Util
+class Mori::App
+  include Mori::Common
+  include Mori::Util
   layout :site
 
   get :books, map: '/books' do

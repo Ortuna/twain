@@ -1,4 +1,4 @@
-module FrontEnd
+module Mori
   class App < Padrino::Application
     register Padrino::Rendering
     register Padrino::Helpers

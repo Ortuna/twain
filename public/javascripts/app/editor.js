@@ -1,6 +1,3 @@
-= javascript_include_tag 'lib/ace-builds/src-min-noconflict/ace.js'
-
-:javascript
   var editor = ace.edit("markdown");
   editor.setTheme("ace/theme/tomorrow_night");
   editor.getSession().setUseWorker(false);  
@@ -21,7 +18,7 @@
     updatePreview(editor.getValue());
   });
 
-:javascript
+
   var $markdown  = null;
   var $preview = null;
   var $gutter  = null;

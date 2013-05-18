@@ -13,12 +13,14 @@
     :javascript
       try{Typekit.load();}catch(e){}
 
-    = stylesheet_link_tag 'global', :media => 'all'
-    = render_partial 'partials/header'
+    = stylesheet_link_tag 'metrize',  :media => 'all'
+    = stylesheet_link_tag 'global',   :media => 'all'
+    = stylesheet_link_tag 'elements', :media => 'all'
+
 
     %link{ :href => "/images/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon" }
     %link{ :href => "/images/icon.jpg", :rel => "apple-touch-icon" }
-  %body{:class => 'editor' }
+  %body
   .container
     .content      
       = yield if block_given?

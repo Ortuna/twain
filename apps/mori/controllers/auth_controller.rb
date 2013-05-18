@@ -1,4 +1,4 @@
-class FrontEnd::App
+class Mori::App
   layout :site
   before except: [:login, :logout] do
     check_login

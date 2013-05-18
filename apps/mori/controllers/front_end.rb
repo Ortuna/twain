@@ -1,4 +1,4 @@
-class FrontEnd::App
+class Mori::App
     get :demo do
         @code = code
         render :index, :layout => 'editor'

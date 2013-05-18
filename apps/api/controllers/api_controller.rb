@@ -1,6 +1,6 @@
 class API::App
-  include Twain::Common
-  include Twain::Util
+  include Mori::Common
+  include Mori::Util
 
   before :except => [:login, :logout] do
     check_login

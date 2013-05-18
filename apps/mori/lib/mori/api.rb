@@ -1,4 +1,4 @@
-module Twain
+module Mori
   class API
     attr_reader :git_location, :options, 
                 :book,         :user,
