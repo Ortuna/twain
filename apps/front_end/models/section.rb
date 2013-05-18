@@ -6,4 +6,7 @@ class Section
 
   property :title, String
 
+  def title
+    @title || base_path
+  end
 end

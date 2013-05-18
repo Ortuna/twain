@@ -32,8 +32,11 @@
   text-align: center;
 }
 
-.login .elements .input-submit
-{
+.login .elements .input-submit {
   background-color: #F56647;
   color: #fff;
+}
+
+.content ul {
+  padding: 0;
 }

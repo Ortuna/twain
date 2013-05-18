@@ -1,0 +1,4 @@
+%h2=@book_title
+- @chapters.each do |chapter|
+  %ul
+    %li= link_to chapter.title, url_for(:sections, @book_id, chapter.base_path)

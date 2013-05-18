@@ -78,4 +78,13 @@ describe 'models' do
     end
 
   end
+
+  describe 'section' do
+
+    it 'defaults to the base_path if there is no title' do
+      section = Section.last
+      section.title.should == section.base_path
+    end
+
+  end
 end

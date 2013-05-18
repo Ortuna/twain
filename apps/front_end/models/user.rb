@@ -17,10 +17,6 @@ class User
     self.password = BCrypt::Password.create(self.password)
   end
 
-  def find_repos
-    Repo.find(user_id: self[:id])
-  end
-
   def self.authenticate(username, password)
     user = User.first(:username)
     return nil unless user

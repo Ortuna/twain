@@ -1,0 +1,4 @@
+%h2 Books
+- @repos.each do |repo|
+  %ul
+    %li= link_to repo.name, url_for(:chapters, repo.id)

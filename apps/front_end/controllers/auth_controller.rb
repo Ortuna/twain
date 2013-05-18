@@ -2,6 +2,7 @@ class FrontEnd::App
   layout :site
   before except: [:login, :logout] do
     check_login
+    @user = session[:user]
   end
 
   get :login, map: '/login' do
