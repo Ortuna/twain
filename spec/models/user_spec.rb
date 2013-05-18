@@ -18,4 +18,12 @@ describe User do
     Helper.create_user('testuser', 'testpassword1')
     User.authenticate('testuser', 'zzyyxx').should be_nil
   end
+
+  it 'finds repos associated with a user' do
+    user = Helper.create_user('testuser', 'password')
+    Helper.create_repo(user[:id], 'http://netscape.com')
+
+    repo = user.find_repos.first
+    repo.location.should == 'http://netscape.com'
+  end
 end

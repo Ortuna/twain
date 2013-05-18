@@ -4,7 +4,7 @@
   - form_tag '/login', class: 'form', method: 'post' do
     %span{ class: 'icon-locked' }
     .elements
-      %input{ name: 'username', type: 'text', class: 'input-login', placeholder: 'username' }
+      %input{ name: 'username', type: 'text', class: 'input-login', placeholder: 'username', autocomplete: 'off' }
       %input{ name: 'password',type: 'password', class: 'input-password', placeholder: 'password' }
       %input{ type: 'submit', class: 'input-submit', value: 'Login'}
 

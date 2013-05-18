@@ -24,7 +24,7 @@ class FrontEnd::App
   
   private
   def check_login
-    halt 403 unless logged_in?
+    redirect '/login' unless logged_in?
   end
 
   def logged_in?
