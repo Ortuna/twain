@@ -4,8 +4,8 @@
   - form_tag '/login', class: 'form', method: 'post' do
     %span{ class: 'icon-locked' }
     .elements
-      %input{ type: 'text', class: 'input-login', placeholder: 'username' }
-      %input{ type: 'password', class: 'input-password', placeholder: 'password' }
+      %input{ name: 'username', type: 'text', class: 'input-login', placeholder: 'username' }
+      %input{ name: 'password',type: 'password', class: 'input-password', placeholder: 'password' }
       %input{ type: 'submit', class: 'input-submit', value: 'Login'}
 
 :javascript
