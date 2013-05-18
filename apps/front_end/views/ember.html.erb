@@ -35,9 +35,8 @@
   App.Section = DS.Model.extend({
     path: DS.attr('string'),
     base_path: DS.attr('string'),
-    book_path: DS.attr('string'),
-    title: DS.attr('string'),
-    book: DS.belongsTo('App.Book'),
+    meta_data: DS.attr('string'),
+    markdown: DS.attr('string'),
   });
 
   App.Chapter.reopenClass({
@@ -51,6 +50,12 @@
         return chapters;
       });
     },
+  });
+
+  App.Section.reopenClass({
+    findByChapter: function(chapter_path) {
+
+    }
   });
 
   App.Router.map(function() {
@@ -81,10 +86,13 @@
 
   App.BooksChaptersRoute = Ember.Route.extend({
     setupController: function(controller, book){
-      if(book.book_id == undefined)
+      debugger;
+      if(book[0] == undefined)
         return;
+      
+      book = book[0];
       controller.set('chapters', false);
-      App.Chapter.findByBook(1).then(function(chapters){
+      App.Chapter.findByBook(book.book_id).then(function(chapters){
         controller.set('chapters', chapters);
       });
       
@@ -96,9 +104,38 @@
       return {book_id: model.book_id};
     },
     model: function(params){
-      return App.Chapter.findByBook(params.book_id);
+      return [{book_id: params.book_id}]
     }
   });
+
+
+  App.BooksChaptersController = Ember.ArrayController.extend({
+    filterByChapter: function(chapter) {
+      debugger;
+      this.transitionToRoute('books.chapters.sections', {book_id: chapter.id});
+    }
+  });
+
+  App.BooksChaptersSectionsRoute = Ember.Route.extend({
+    setupController: function(controller, book){
+      if(book.book_id == undefined)
+        return;
+      controller.set('chapters', false);
+      App.Chapter.findByBook(1).then(function(chapters){
+        controller.set('chapters', chapters);
+      });
+      
+    },
+    renderTemplate: function() {
+      this.render('books.chapters.sections', {into: 'application'});
+    },
+    serialize: function(model){
+      return {chapter_path: model.path};
+    },
+    model: function(params){
+      return App.Chapter.findByBook(params.path);
+    }
+  }); 
 
 </script>
 
@@ -121,7 +158,17 @@
   <ul>
   {{#if chapters}}
     {{#each chapter in chapters}}
-      <li>{{chapter.title}}</li>
+      <li><a {{action 'filterByChapter' chapter href="true"}}>{{chapter.title}}</a></li>
+    {{/each}}
+  {{/if}}
+  </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="books/chapters/sections">
+  <ul>
+  {{#if sections}}
+    {{#each section in sections}}
+      <li>{{section.base_path}}</li>
     {{/each}}
   {{/if}}
   </ul>

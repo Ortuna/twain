@@ -7,6 +7,7 @@ gem 'multi_json'
 gem 'rake'
 
 gem 'slim'
+gem 'tilt', '~> 1.3.7'
 gem 'dm-validations'
 gem 'dm-types'
 gem 'dm-core'
@@ -28,3 +29,4 @@ group :test do
   gem 'rspec'
   gem 'rack-test', :require => 'rack/test'
 end
+

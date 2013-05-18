@@ -1,10 +1,8 @@
 class FrontEnd::App
-  layout :global
-
-  get :demo do
-    @code = code
-    render :ember
-  end
+    get :demo do
+        @code = code
+        render :index, :layout => 'editor'
+    end
 
 def code
 <<-EOS
