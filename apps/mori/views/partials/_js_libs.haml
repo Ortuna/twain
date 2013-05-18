@@ -1,3 +1,32 @@
+= javascript_include_tag 'http://builds.emberjs.com.s3.amazonaws.com/handlebars-1.0.0-rc.3.js'
+= javascript_include_tag 'http://builds.emberjs.com.s3.amazonaws.com/ember-latest.min.js'
+
 = javascript_include_tag 'lib/marked'
 = javascript_include_tag 'lib/ace-builds/src-min-noconflict/ace.js'
-= javascript_include_tag 'app/editor.js'
+
+- if @hbs_assets
+  :javascript
+    var templates = #{@hbs_assets.to_json};
+    templates.forEach(function(template){
+      $.ajax({
+        url: template,
+        async: false
+      }).success(function(data) {
+        var templateName = basename(template, '.handlebars');
+        Ember.TEMPLATES[templateName] = Handlebars.compile(data);
+      });
+    });
+
+    function basename(path, suffix) {
+      var b = path.replace(/^.*[\/\\]/g, '');
+
+      if (typeof(suffix) == 'string' && b.substr(b.length - suffix.length) == suffix) {
+        b = b.substr(0, b.length - suffix.length);
+      }
+
+      return b;
+    }
+
+- if @js_assets
+  - @js_assets.each do |asset|
+    = javascript_include_tag asset
