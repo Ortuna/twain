@@ -1,9 +1,4 @@
-  // var editor = ace.edit("markdown");
-  // editor.setTheme("ace/theme/tomorrow_night");
-  // editor.getSession().setUseWorker(false);  
-  // editor.getSession().setMode("ace/mode/markdown");
-  // editor.getSession().setTabSize(2);
-  // editor.getSession().setUseWrapMode(true);
+
 
   // marked.setOptions({
   //   gfm: true,

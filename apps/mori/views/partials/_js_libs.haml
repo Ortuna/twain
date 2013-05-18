@@ -13,7 +13,7 @@
         async: false
       }).success(function(data) {
         var templateName = basename(template, '.handlebars');
-        Ember.TEMPLATES[templateName] = Handlebars.compile(data);
+        Ember.TEMPLATES[templateName] = Ember.Handlebars.compile(data);
       });
     });
 
