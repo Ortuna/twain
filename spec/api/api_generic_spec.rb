@@ -1,4 +1,4 @@
-describe Twain::API do
+describe Mori::API do
 
   def setup_api(git_path)
     Helper.setup_api(git_path, 'apiuser', 'apipassword')

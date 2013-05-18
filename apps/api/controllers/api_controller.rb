@@ -39,6 +39,10 @@ API::App.controllers :books do
     to_json(find_chapter(book_id, chapter_id).sections, :sections)
   end
 
+  get ':book_id/chapters/:chapter_id/sections/:section_id' do |book_id, chapter_id, section_id|
+    to_json(find_section(book_id, chapter_id, section_id), :section)
+  end
+
   post ':book_id/chapters/:chapter_id/sections' do |book_id, chapter_id|
     chapter      = find_chapter(book_id, chapter_id)
     post_section = parse_json(params["section"])

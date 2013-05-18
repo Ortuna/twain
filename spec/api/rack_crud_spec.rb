@@ -1,4 +1,4 @@
-describe Twain::API do
+describe Mori::API do
 
   def login(username, password)
     params = { username: username, password: password }

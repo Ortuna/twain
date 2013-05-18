@@ -1,4 +1,4 @@
-describe Twain::API do
+describe Mori::API do
 
   def login(username, password)
     params = { username: username, password: password }
@@ -73,5 +73,21 @@ describe Twain::API do
 
     sections = Helper.parse_json(last_response.body)["sections"]
     sections.first["metadata"]["title"].should_not be_nil
+  end
+
+  it 'gets a section' do
+    book_id    = get_repo_list.first["id"]
+
+    get "#{api_prefix}/#{book_id}/chapters"
+    chapter_id = Helper.parse_json(last_response.body)["chapters"].first["base_path"]
+
+    get "#{api_prefix}/#{book_id}/chapters/#{chapter_id}/sections"
+    section_id = Helper.parse_json(last_response.body)["sections"].first["base_path"]
+    
+    get "#{api_prefix}/#{book_id}/chapters/#{chapter_id}/sections/#{section_id}"
+    last_response.should be_ok
+
+    section = Helper.parse_json(last_response.body)["section"]
+    section["metadata"]["title"].should_not be_nil
   end
 end
