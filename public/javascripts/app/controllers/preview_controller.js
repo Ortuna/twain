@@ -3,7 +3,12 @@ App.PreviewController = Ember.Controller.extend({
   markdown: '',
   markdownBinding: Ember.Binding.oneWay('controllers.editor.markdown'),
   previewHTML: function(){
-    return marked(this.get('markdown'));
+    var code     = this.get('markdown');
+    if(typeof code == 'undefined')
+      return '';
+    var markdown = code.match(/-{3,}\s([\s\S]*?)-{3,}\s([\s\S]*)/);
+    markdown == null ? markdown = code : markdown = markdown[2] 
+    return marked(markdown);
   }.property('markdown'),
   setupPreview: function(){
     marked.setOptions({

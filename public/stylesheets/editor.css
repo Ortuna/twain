@@ -2,7 +2,7 @@
   CSS - Editor
 */
 body {
-  background-color: #202020;
+  background-color: #fff;
   overflow: hidden;
 }
 
@@ -34,11 +34,17 @@ body {
   padding: 1px;
 }
 
+.markdown .ace_content {
+  background-color: #303A44;
+}
+
+.markdown .ace_active-line {
+  background-color: #3B4858 !important;
+}
+
 .markdown .ace_gutter {
   display: none;
 }
-
-
 
 .preview {
   background-color: #FFF;
