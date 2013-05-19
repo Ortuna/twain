@@ -31,6 +31,9 @@ App.EditorController = Ember.Controller.extend({
   viewDidLoad: function(){
     this.send('setupAceEditor');
     this.send('loadSection');
+  },
+  save: function(){
+    this.get('section').save();
   }
 });
 
@@ -52,4 +55,4 @@ App.EditorView = Ember.View.extend({
     var windowHeight = $(window).height();
     element.height(windowHeight);
   }
-})
+});

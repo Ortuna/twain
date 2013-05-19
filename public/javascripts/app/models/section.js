@@ -24,12 +24,11 @@ App.Section = Ember.Object.extend({
         metadata: model.get('metadata'),
       } 
     };
-    console.debug(data);
     model.set('isSaving', true);
     $.post(model.get('save_path'), data, function(){
       model.set('isSaving', false);
-    }).done(function(){ console.debug('worked!'); })
-      .fail(function(){ console.debug('didnt work!'); })
+    }).done(function(){ console.debug('saved'); })
+      .fail(function(){ console.debug('couldnt save'); })
   }
 });
 
