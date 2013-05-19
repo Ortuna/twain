@@ -6,6 +6,7 @@ module Mori::Common
   end
 
   def parse_json(json)
+    return json unless json.kind_of? String
     MultiJson::load(json)
   end
 

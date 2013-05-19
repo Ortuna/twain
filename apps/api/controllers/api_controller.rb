@@ -93,19 +93,27 @@ API::App.controllers :books do
     invalid_entity if chapter.destroy == false
   end
 
-  post ':book_id/chapters/:chapter_id/section/:section_id' do |book_id, 
+  post ':book_id/chapters/:chapter_id/sections/:section_id' do |book_id, 
                                                               chapter_id, 
                                                               section_id|
     setup_api(book_id)
     section      = find_section(book_id, chapter_id, section_id)
+
     post_section = parse_json(params["section"])
 
     invalid_entity unless post_section
+
+    #TODO: Do something else but good for now
+    if params["section"]["metadata"]
+      params["section"]["metadata"] = YAML::load(params["section"]["metadata"]) 
+    end
+    
     update_attributes(section, post_section)
+
     section.save if section.dirty?
   end
 
-  delete ':book_id/chapters/:chapter_id/section/:section_id' do |book_id, 
+  delete ':book_id/chapters/:chapter_id/sections/:section_id' do |book_id, 
                                                                 chapter_id, 
                                                                 section_id|
     setup_api(book_id)

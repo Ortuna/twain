@@ -136,7 +136,7 @@ describe Mori::API do
       section = get_json_from(section_list_url)["sections"].first
 
       url =  "#{api_prefix}/#{get_repo_list.first['id']}"
-      url << "/chapters/#{chapter['base_path']}/section/#{section['base_path']}"
+      url << "/chapters/#{chapter['base_path']}/sections/#{section['base_path']}"
 
       section["title"] = new_title
 
@@ -155,7 +155,7 @@ describe Mori::API do
       section_id = get_json_from(section_list_url)["sections"].first['base_path']
 
       section_url =  "#{api_prefix}/#{get_repo_list.first['id']}"
-      section_url << "/chapters/#{chapter['base_path']}/section/#{section_id}"
+      section_url << "/chapters/#{chapter['base_path']}/sections/#{section_id}"
 
       delete section_url
       last_response.should be_ok
