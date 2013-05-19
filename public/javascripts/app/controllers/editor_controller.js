@@ -1,4 +1,5 @@
 App.EditorController = Ember.Controller.extend({
+  needs: ['preview'],
   markdown: function(){
     return this.get('section.content');
   }.property('section.content'),
@@ -34,7 +35,7 @@ App.EditorController = Ember.Controller.extend({
   },
   save: function(){
     this.get('section').save();
-  }
+  },
 });
 
 
@@ -54,5 +55,5 @@ App.EditorView = Ember.View.extend({
     var element = this.$();
     var windowHeight = $(window).height();
     element.height(windowHeight);
-  }
+  },
 });

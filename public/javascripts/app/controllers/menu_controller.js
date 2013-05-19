@@ -1,5 +1,5 @@
 App.MenuController = Ember.Controller.extend({
-  needs: ['editor'],
+  needs: ['editor', 'preview'],
 });
 
 App.MenuView = Ember.View.extend({

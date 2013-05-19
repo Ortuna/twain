@@ -19,7 +19,7 @@ App.PreviewController = Ember.Controller.extend({
       sanitize: false,
       smartLists: true,
     });
-  }
+  },
 });
 
 App.PreviewView = Ember.View.extend({
@@ -37,5 +37,5 @@ App.PreviewView = Ember.View.extend({
     var element = this.$();
     var windowHeight = $(window).height();
     element.height(windowHeight);
-  }
+  },
 });

@@ -7,7 +7,7 @@ class Mori::App
     @repos = @user.repos
     render :books
   end
-
+  
   get :chapters, map: '/books/:id/chapters' do
     setup_api(params[:id])
     @book       = api.current_book
