@@ -36,7 +36,7 @@ body {
 
 .markdown .ace_content {
   background-color: #000;
-  padding: 15px 5px;  
+  margin: 15px 0px;  
 }
 
 .markdown .ace_active-line {
@@ -66,9 +66,9 @@ body {
 
 .status {
   color:#000;
-  font-size: 24px;
+  font-size: 18px;
   margin-right:20px;
-  line-height: 18px;
+  line-height: 22px;
 }
 
 .menu,
@@ -77,12 +77,12 @@ body {
   opacity: .3;
   cursor: default;
   border-radius: 5px;
-  background-color: #eee;
   float:left;
 }
 
 .menu {
   color: #000;
+  background-color: #eee;
   opacity: 1;
   font-size: 24px;
   float: right;
@@ -101,20 +101,4 @@ body {
 
 .drawer .content {
   padding: 0 20px 20px;
-}
-
-.drawer .search input {
-  font-family: adelle, serif;
-  font-size: 100%;
-  width: 175px;
-  padding: 6px 10px;
-  color: #333;
-  text-shadow: 0 1px 0 white;
-  background-color: white;
-  border: 0;
-  border-radius: 5px;
-  outline: 0;
-  -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
 }
