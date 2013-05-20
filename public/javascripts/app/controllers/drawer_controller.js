@@ -24,10 +24,13 @@ App.DrawerView = Ember.View.extend({
   animateOpen: function(){
     if(!this.$()) { return; }
     this.$().stop();
-    var visible = this.get('controller.visible');
+    var visible  = this.get('controller.visible');
+    var duration = 250;
+    var easing   = 'swing';
+    
     if(visible)
-      this.$().animate({ width: '300px'});
+      this.$().animate({ width: '300px'}, duration, easing);
     else
-     this.$().animate({ width: '0px'});   
+     this.$().animate({ width: '0px'}, duration, easing);
   }.observes('controller.visible'),
 });

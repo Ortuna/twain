@@ -89,13 +89,19 @@ body {
 }
 
 .drawer{
-  background-color: #2B3039;
   z-index: 5;
   color:#fff;
   width:0px;
   overflow: hidden;
+  background: #fff;
+  -webkit-box-shadow: 5px 0 50px #333;
+  -moz-box-shadow: 5px 0 50px #333;
+  box-shadow: 5px 0 50px #333;
 }
 
+.drawer .content {
+  padding: 0 20px 20px;
+}
 
 .drawer .search input {
   font-family: adelle, serif;
