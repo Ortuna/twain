@@ -32,14 +32,13 @@ code {
 pre {
   background-color: #B8B694;
   background-color: rgba(40, 40, 0, 0.06);
-  margin: 10px 0;
+  padding:15px;
   overflow: hidden;
-  padding: 3px;
   white-space: pre-wrap;
 }
 
 pre code {
-  font-size: 87%;
+  font-size: 80%;
   background-color: transparent;
   font-family: 'Droid Sans Mono', sans-serif;
   border-radius: 5px;

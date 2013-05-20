@@ -7,7 +7,7 @@ class Mori::App
     @repos = @user.repos
     render :books
   end
-  
+
   get :chapters, map: '/books/:id/chapters' do
     setup_api(params[:id])
     @book       = api.current_book
@@ -24,6 +24,14 @@ class Mori::App
     @chapter    = @book.chapters.first(base_path: params[:chapter_path])
     @sections   = @chapter.sections
     render :sections
+  end
+
+  get :book_edit, map: 'books/:id/edit' do
+    setup_api(params[:id])
+    @book       = api.current_book
+    @book_id    = params[:id]
+    @title      = @book.title || @book.base_path
+    render :book_edit
   end
 
 end
