@@ -14,8 +14,8 @@ gem 'dm-core'
 gem 'dm-gitfs-adapter', git: 'git@github.com:Ortuna/dm-gitfs-adapter.git'
 gem 'dm-migrations'
 gem 'dm-serializer'
-gem 'bcrypt-ruby'
-
+gem 'omniauth'
+gem 'omniauth-github'
 
 
 group :development, :test do

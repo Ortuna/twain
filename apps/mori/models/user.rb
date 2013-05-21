@@ -1,28 +1,36 @@
-require 'bcrypt'
 class User
   include DataMapper::Resource
 
   property :id,       Serial
-  property :username, String
-  property :password, String
+  property :uid,      String
+  property :role,     String
+  property :provider, String
+  property :name,     String
+  property :image_url,String
 
-  validates_presence_of   :username, :password
-  validates_uniqueness_of :username
+  has n, :repos
 
-  has n, :repos, 'Repo'
-  before :save, :encrypt_password
+  validates_presence_of   :uid, :provider, :name
+  validates_uniqueness_of :uid
 
-
-  def encrypt_password
-    self.password = BCrypt::Password.create(self.password)
+  def self.find_by_id(id)
+    first(:id => id)
   end
 
-  def self.authenticate(username, password)
-    user = User.first(:username)
-    return nil unless user
-    bpassword = BCrypt::Password.new(user.password)
-    return nil unless bpassword
-    return nil unless bpassword == password
-    user
+  def self.find_by_provider_and_uid(provider, uid)
+    first(:provider => provider, 
+          :uid => uid)
+  end
+
+  def self.create_with_omniauth(auth)
+    user       = User.new
+    user.attributes = {
+      provider:  auth['provider'],
+      uid:       auth['uid'],
+      name:      auth['info']['name'],
+      image_url: auth['info']['image'],
+      role:      'author'
+    }
+    user.save ? user : nil
   end
 end

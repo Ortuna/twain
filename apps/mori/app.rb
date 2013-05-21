@@ -6,5 +6,6 @@ module Mori
     enable :sessions
     set :allow_disabled_csrf, true
     set :protect_from_csrf, false
+       
   end
 end

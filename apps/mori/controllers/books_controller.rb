@@ -4,7 +4,7 @@ class Mori::App
   layout :site
 
   get :books, map: '/books' do
-    @repos = @user.repos
+    @repos = current_account.repos
     render :books
   end
 

@@ -5,5 +5,5 @@ class Repo
   property :location, String
   property :name,     String
 
-  belongs_to :user, 'User'
+  belongs_to :user
 end

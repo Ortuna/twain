@@ -1,24 +1,2 @@
-.title
-  %h1 Writing.is
-.login
-  - form_tag '/login', class: 'form', method: 'post' do
-    %span{ class: 'icon-locked' }
-    .elements
-      %input{ name: 'username', type: 'text', class: 'input-login', placeholder: 'username', autocomplete: 'off' }
-      %input{ name: 'password',type: 'password', class: 'input-password', placeholder: 'password' }
-      %input{ type: 'submit', class: 'input-submit', value: 'Login'}
-
-:javascript
-  $(document).ready(function(){
-    $(window).resize(function(){ centerElement($('.login')); });
-    centerElement($('.login'));
-  });
-
-  function centerElement($el) {
-    var loginTop  = Math.max(0, $(window).height()/2 - $el.outerHeight()/2);
-    var loginLeft = Math.max(0, $(window).width()/2 - $el.outerWidth()/2);
-
-    $el.css('position', 'fixed');
-    $el.css('top', loginTop);
-    $el.css('left', loginLeft);  
-  }
+.login-logo
+  =link_to image_tag('github-mark.png'), '/auth/github'
