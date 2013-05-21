@@ -1,13 +1,6 @@
-PATH
-  remote: ../dm-gitfs-adapter
-  specs:
-    dm-gitfs-adapter (1.0.0)
-      dm-core
-      dm-types
-      grit
-
-PATH
-  remote: ~/Desktop/code/opensource/padrino-framework
+GIT
+  remote: git://github.com/padrino/padrino-framework.git
+  revision: cef1cbc123b61aa7dca249f39caabc21b43d4486
   specs:
     padrino (0.11.1)
       padrino-admin (= 0.11.1)
@@ -38,6 +31,15 @@ PATH
     padrino-mailer (0.11.1)
       mail (~> 2.5.3)
       padrino-core (= 0.11.1)
+
+GIT
+  remote: git@github.com:Ortuna/dm-gitfs-adapter.git
+  revision: b61bd4409a950aa089f9a75c328cbb48cd139e3b
+  specs:
+    dm-gitfs-adapter (1.0.0)
+      dm-core
+      dm-types
+      grit
 
 GEM
   remote: https://rubygems.org/
@@ -121,12 +123,11 @@ GEM
     json_pure (1.7.7)
     listen (0.7.3)
     lumberjack (1.0.3)
-    mail (2.5.3)
-      i18n (>= 0.4.0)
+    mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
-    mime-types (1.22)
+    mime-types (1.23)
     multi_json (1.7.2)
     polyglot (0.3.3)
     posix-spawn (0.3.6)

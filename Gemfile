@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 
-gem 'padrino', :path => '~/Desktop/code/opensource/padrino-framework'
+gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 gem 'active_model_serializers'
 gem 'rake'
 
@@ -11,18 +11,17 @@ gem 'tilt', '~> 1.3.7'
 gem 'dm-validations'
 gem 'dm-types'
 gem 'dm-core'
-gem 'dm-gitfs-adapter', path: '../dm-gitfs-adapter'
+gem 'dm-gitfs-adapter', git: 'git@github.com:Ortuna/dm-gitfs-adapter.git'
 gem 'dm-migrations'
 gem 'dm-serializer'
 gem 'bcrypt-ruby'
-gem 'jasmine'
-gem 'guard-jasmine', :require => false
 gem 'haml'
-
 
 group :development, :test do
   gem 'pry'
   gem 'dm-sqlite-adapter'
+  gem 'jasmine'
+  gem 'guard-jasmine', :require => false  
 end
 
 group :test do
