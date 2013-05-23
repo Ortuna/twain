@@ -143,3 +143,7 @@ a:active,
 a:focus {
   text-decoration: none;
 }
+
+ul li {
+  margin-left: 1.0em;
+}

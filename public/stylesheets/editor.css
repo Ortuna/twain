@@ -35,7 +35,6 @@ body {
 }
 
 .markdown .ace_content {
-  background-color: #000;
   margin: 15px 0px;
 }
 
@@ -88,17 +87,18 @@ body {
   float: right;
 }
 
-.drawer{
-  z-index: 5;
-  color:#fff;
-  width:0px;
-  overflow: hidden;
-  background: #fff;
-  -webkit-box-shadow: 5px 0 50px #333;
-  -moz-box-shadow: 5px 0 50px #333;
-  box-shadow: 5px 0 50px #333;
+.browser {
+  background-color: #fff;
+  border-radius: 5px;
+  width:25%;
+  z-index:5;
+  overflow: visible;
+  border:3px solid rgba(0,0,0,.15);
+  -webkit-box-shadow:0 5px 25px rgba(0,0,0,.3);
+  -moz-box-shadow:0 5px 25px rgba(0,0,0,.3);
+  box-shadow:0 5px 25px rgba(0,0,0,.3);
 }
 
-.drawer .content {
-  padding: 0 20px 20px;
+.browser .content {
+  padding:10px;
 }
