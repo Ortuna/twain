@@ -2,10 +2,6 @@ class API::App
   include Mori::Common
   include Mori::Util
 
-  before do
-    # halt(403, 'login required') unless current_user
-  end
-
   def to_json(object, root = false)
     root = root.to_s if root
     #TODO: deal with to_json => to_s conversion, should just be to_json

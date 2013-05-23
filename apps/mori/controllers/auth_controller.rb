@@ -7,7 +7,7 @@ class Mori::App
   set :login_page,  '/login'
   set :admin_model, 'User'
   
-  protect_paths %w[/]
+  protect_paths %w[/ /api]
   allow_paths   %w[/login /logout /auth/github /auth/github/callback]
   
   #providers
