@@ -7,24 +7,12 @@ module Mori
     def initialize(opts = {})
       @options      = defaults.merge(opts)
       @git_location = options[:git]
-      @username     = options[:username]
-      @password     = options[:password]
       @user         = options[:user]
 
-      user ? verify_user! : authenticate! 
       setup_datamapper
-
+      
       @book         = ::Book
       @current_book = book.first
-    end
-
-    def verify_user!
-      raise 'Invalid user object' unless user[:id]
-    end
-
-    def authenticate!(username = @username, password = @password)
-      @user = User.authenticate(username, password)
-      raise 'Could not authenticate' if !@user || !@user.username
     end
 
     def clean!

@@ -1,17 +1,13 @@
 module Mori::Common
 
-  def create_api(repo_location, user)
+  def create_api(repo_location)
     tmp_prefix = "#{Padrino.root}/tmp/repos"
-    Mori::API.new(git: repo_location, prefix: tmp_prefix, user: user)
+    Mori::API.new(git: repo_location, prefix: tmp_prefix)
   end
 
   def parse_json(json)
     return json unless json.kind_of? String
     MultiJson::load(json)
-  end
-
-  def check_login
-    halt(403, 'login required') unless session[:user]
   end
 
   def not_found

@@ -10,13 +10,12 @@ module Helper
       clean_users
     end
 
-    def setup_api(git_path, username = 'apiuser', password = 'password')
+    def setup_api(git_path, username = 'apiuser')
       clear_all   
-      create_user(username, password)
+      create_user(username)
       Mori::API.new(git: git_path,
                   prefix: tmp_prefix,
-                username: username,
-                password: password)
+                  user: User.new)
     end
 
     def parse_json(json)

@@ -1,10 +1,5 @@
 describe Mori::API do
 
-  def login(username, password)
-    params = { username: username, password: password }
-    post '/login', params
-  end
-
   def get_repo_list
     get api_prefix
     Helper.parse_json(last_response.body)["books"]
@@ -16,14 +11,9 @@ describe Mori::API do
 
     @repo_location = "#{SPEC_PATH}/fixture/books#local-only"
 
-    #Create a user
-    username, password = 'apiuser', 'temp'
-    user = Helper.create_user(username, password)
-
     #Create a repo to point to
+    user = Helper.create_user('test_api_user')
     repo = Helper.create_repo(user[:id], @repo_location)
-
-    login(username, password)
   end
 
   it 'gets a list of books' do
@@ -52,7 +42,6 @@ describe Mori::API do
   it 'gets all the chapters in a book' do
     book_id = get_repo_list.first["id"]
     book_id.should_not be_nil
-
     get "#{api_prefix}/#{book_id}/chapters"
     last_response.should be_ok
 

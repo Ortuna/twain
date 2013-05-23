@@ -3,7 +3,7 @@ module Mori::Util
 
   def setup_request(book_id)
     repo = find_repo(book_id)
-    create_api(repo[:location], session[:user])
+    create_api repo[:location]
   end
 
   def setup_api(book_id)

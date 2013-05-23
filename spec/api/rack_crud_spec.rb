@@ -1,10 +1,5 @@
 describe Mori::API do
 
-  def login(username, password)
-    params = { username: username, password: password }
-    post '/login', params
-  end
-
   def get_repo_list
     get_json_from(api_prefix)["books"]
   end
@@ -28,14 +23,13 @@ describe Mori::API do
 
     @repo_location = "#{SPEC_PATH}/fixture/books#local-only"
 
-    #Create a user
-    username, password = 'apiuser', 'temp'
-    user = Helper.create_user(username, password)
-
-    #Create a repo to point to
+    user = User.new.tap do |user|
+      user[:uid]      = 'testuser'
+      user[:name]     = 'testuser'
+      user[:provider] = 'testprovider'
+      user.save
+    end
     repo = Helper.create_repo(user[:id], @repo_location)
-
-    login(username, password)
   end
 
   after :each do

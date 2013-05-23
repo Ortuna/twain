@@ -1,9 +1,10 @@
 module Helper
   class << self  
-    def create_user(username, password)
+    def create_user(username)
       User.new.tap do |user|
-        user.username = username
-        user.password = password
+        user[:uid]      = username
+        user[:name]     = username
+        user[:provider] = 'testprovider'
         user.save
       end
     end

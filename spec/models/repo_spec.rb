@@ -8,7 +8,7 @@ describe Repo do
   it 'creates a repo correctly' do
     location = 'http://www.google.com'
     expect{
-      user = Helper.create_user('testuser', 'password')
+      user = Helper.create_user('testuser')
       Helper.create_repo(user[:id], location)
     }.to_not raise_error
 
@@ -16,9 +16,9 @@ describe Repo do
   end
 
   it 'has the correct relationships' do
-      user = Helper.create_user('testuser', 'password')
+      user = Helper.create_user('testuser')
       Helper.create_repo(user[:id], 'http://netscape.com')
       repo = Repo.first(:location => 'http://netscape.com')
-      repo.user[:username].should == 'testuser'
+      repo.user[:uid].should == 'testuser'
   end
 end

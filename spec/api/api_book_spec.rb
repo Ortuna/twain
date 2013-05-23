@@ -1,6 +1,6 @@
 describe 'Twain::API books' do
   def setup_api(git_path)
-    Helper.setup_api(git_path, 'apiuser', 'apipassword')
+    Helper.setup_api(git_path, User.new)
   end
 
   before :each do 

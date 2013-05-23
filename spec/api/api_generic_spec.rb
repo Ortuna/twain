@@ -1,7 +1,7 @@
 describe Mori::API do
 
   def setup_api(git_path)
-    Helper.setup_api(git_path, 'apiuser', 'apipassword')
+    Helper.setup_api(git_path, 'apiuser')
   end
 
   describe 'basics' do
@@ -34,35 +34,10 @@ describe Mori::API do
       expect {setup_api('xyz repo')}.to raise_error
     end
 
-    it 'fails with a invalid login' do
-      expect {
-        Mori::API.new(git: @git_path,
-                    prefix: Helper.tmp_prefix,
-                  username: 'unkownapiuser',
-                  password: 'unknownpassword')
-      }.to raise_error
-    end
-
-    it 'allows api with a user object' do
-      Helper.clean_users
-      user = Helper.create_user('username', 'password')
-      expect {
-        Mori::API.new(git: @git_path,
-                    prefix: Helper.tmp_prefix,
-                      user: user)
-      }.to_not raise_error
-    end
-
-    it 'fails with a bad user' do
-      user = {}
-      expect {
-        Mori::API.new(git: @git_path,
-                    prefix: Helper.tmp_prefix,
-                      user: user)
-      }.to raise_error
-    end
+    it 'should check authentication'
   end
 
+  
   describe 'restricted areas' do
     def login(username, password) 
       post '/login', { username: username, password: password }
@@ -73,23 +48,9 @@ describe Mori::API do
       clear_cookies
     end
 
-    it 'should block api to logged in users only' do
-      get '/books'
-      last_response.status.should == 403
-    end
-
-    it 'should block api to logged in users only deux' do
-      username, password = 'apiuserz', 'apipasswordz'
-      Helper.create_user(username, password)
-      login(username, 'password')
-
-      get '/books'
-      last_response.status.should == 403
-    end
-
     it 'should not block api if logged in' do
       username, password = 'testuser', 'temp'
-      Helper.create_user(username, password)
+      Helper.create_user(username)
       login(username, password)
       get '/books'
       last_response.status.should == 200
