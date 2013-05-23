@@ -4,6 +4,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/boot")
 SPEC_PATH    = File.expand_path(File.dirname(__FILE__))
 FIXTURE_PATH = "#{SPEC_PATH}/fixtures/**/*.rb"
 
+
 #only the :default repo, not gitfs
 DataMapper.repository.auto_migrate!
 
