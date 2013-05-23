@@ -1,8 +1,8 @@
 describe 'models' do
   before :each do
-    @remote_repo = "#{SPEC_PATH}/fixture/books"
+    @remote_repo = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
     @tmp_path    = "#{Helper.tmp_prefix}/books"
-    DataMapper.setup(:gitfs, "gitfs:://#{@tmp_path}?#{@remote_repo}##local-only")
+    DataMapper.setup(:gitfs, "gitfs:://#{@tmp_path}?#{@remote_repo}")
   end
 
   after :each do

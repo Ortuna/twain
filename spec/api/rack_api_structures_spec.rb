@@ -9,7 +9,7 @@ describe Mori::API do
     clear_cookies
     Helper.clear_all
 
-    @repo_location = "#{SPEC_PATH}/fixture/books#local-only"
+    @repo_location = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
 
     #Create a repo to point to
     user = Helper.create_user('test_api_user')

@@ -21,7 +21,7 @@ describe Mori::API do
     clear_cookies
     Helper.clear_all
 
-    @repo_location = "#{SPEC_PATH}/fixture/books#local-only"
+    @repo_location = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
 
     user = User.new.tap do |user|
       user[:uid]      = 'testuser'

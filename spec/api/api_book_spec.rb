@@ -4,8 +4,8 @@ describe 'Twain::API books' do
   end
 
   before :each do 
-    @git_path = "#{SPEC_PATH}/fixture/books#local-only"
-    @api      = setup_api @git_path
+    @repo_location = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
+    @api           = setup_api @repo_location
   end
 
   after :each do

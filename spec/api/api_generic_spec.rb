@@ -6,8 +6,8 @@ describe Mori::API do
 
   describe 'basics' do
     before :each do
-      @git_path = "#{SPEC_PATH}/fixture/books#local-only"
-      @api      = setup_api @git_path
+      @repo_location = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
+      @api      = setup_api @repo_location
     end
 
     after :each do
@@ -16,8 +16,8 @@ describe Mori::API do
     end
 
     it 'sets options correctly' do
-      @api.git_location.should  == @git_path
-      @api.options[:git].should == @git_path
+      @api.git_location.should  == @repo_location
+      @api.options[:git].should == @repo_location
     end
   
     it 'sets the local_path variable' do
