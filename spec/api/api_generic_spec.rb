@@ -33,29 +33,6 @@ describe Mori::API do
     it 'fails with an invalid git path' do
       expect {setup_api('xyz repo')}.to raise_error
     end
-
-    it 'should check authentication'
   end
-
   
-  describe 'restricted areas' do
-    def login(username, password) 
-      post '/login', { username: username, password: password }
-    end
-
-    before :each do
-      Helper.clean_users
-      clear_cookies
-    end
-
-    it 'should not block api if logged in' do
-      username, password = 'testuser', 'temp'
-      Helper.create_user(username)
-      login(username, password)
-      get '/books'
-      last_response.status.should == 200
-    end
-    
-  end
-
 end

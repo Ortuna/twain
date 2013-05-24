@@ -23,7 +23,8 @@ module Helper
     end
 
     def api_prefix
-      '/books'
+      '/api/v1/books'
     end
+    
   end
 end

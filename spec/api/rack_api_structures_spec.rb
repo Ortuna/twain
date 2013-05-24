@@ -12,8 +12,8 @@ describe Mori::API do
     @repo_location = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
 
     #Create a repo to point to
-    user = Helper.create_user('test_api_user')
-    repo = Helper.create_repo(user[:id], @repo_location)
+    omniauth_login
+    repo = Helper.create_repo(User.first[:id], @repo_location)
   end
 
   it 'gets a list of books' do

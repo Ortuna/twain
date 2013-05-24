@@ -22,14 +22,8 @@ describe Mori::API do
     Helper.clear_all
 
     @repo_location = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
-
-    user = User.new.tap do |user|
-      user[:uid]      = 'testuser'
-      user[:name]     = 'testuser'
-      user[:provider] = 'testprovider'
-      user.save
-    end
-    repo = Helper.create_repo(user[:id], @repo_location)
+    omniauth_login
+    repo = Helper.create_repo(User.first[:id], @repo_location)
   end
 
   after :each do

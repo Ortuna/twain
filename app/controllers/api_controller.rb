@@ -1,5 +1,4 @@
-class API::App
-
+class Mori::App
   include Mori::Common
   include Mori::Util
 
@@ -14,7 +13,7 @@ class API::App
   end
 end
 
-API::App.controllers :books do
+Mori::App.controllers '/api/v1/books' do
 
   get :index do
     to_json(Repo.all, :books)

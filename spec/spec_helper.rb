@@ -13,7 +13,7 @@ RSpec.configure do |conf|
 end
 
 def app
-  API::App.tap { |app|  }
+  Mori::App.tap { |app|  }
 end
 
 Dir["#{SPEC_PATH}/helpers/**/*.rb"].each do |helper|
@@ -22,4 +22,21 @@ end
 
 def api_prefix
   Helper.api_prefix
+end
+
+def omniauth_login(opts = {})
+  options = {
+    'provider'     => 'github', 
+    'access_token' => '123', 
+    'uid'          => '123545',
+    'info' => {
+      'name'  => 'test',
+      'image' => 'test' 
+    }
+  }.merge(opts)
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:github] = options
+  get '/auth/github'
+  follow_redirect!
 end

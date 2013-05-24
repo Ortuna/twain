@@ -33,5 +33,4 @@ Padrino.configure_apps do
 end
 
 # Mounts the core application for this project
-Padrino.mount('Mori::App', :app_file => Padrino.root('apps/mori/app.rb')).to('/')
-Padrino.mount('API::App', :app_file => Padrino.root('apps/api/app.rb')).to('/api/v1')
+Padrino.mount('Mori::App').to('/')
