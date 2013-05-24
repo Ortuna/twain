@@ -1,10 +1,5 @@
 describe Mori::API do
 
-  def get_repo_list
-    get api_prefix
-    Helper.parse_json(last_response.body)["books"]
-  end
-
   before :each do
     clear_cookies
     Helper.clear_all

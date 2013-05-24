@@ -1,22 +1,5 @@
 describe Mori::API do
 
-  def get_repo_list
-    get_json_from(api_prefix)["books"]
-  end
-
-  def get_first_book
-    get_json_from("#{api_prefix}/#{get_repo_list.first["id"]}")["book"]
-  end
-
-  def get_first_chapter
-    get_json_from("#{api_prefix}/#{get_repo_list.first["id"]}/chapters")["chapters"].first
-  end
-
-  def get_json_from(url)
-    get url
-    Helper.parse_json(last_response.body)
-  end
-
   before :each do
     clear_cookies
     Helper.clear_all

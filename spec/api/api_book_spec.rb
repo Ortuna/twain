@@ -1,8 +1,5 @@
 describe 'Twain::API books' do
-  def setup_api(git_path)
-    Helper.setup_api(git_path, User.new)
-  end
-
+ 
   before :each do 
     @repo_location = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
     @api           = setup_api @repo_location

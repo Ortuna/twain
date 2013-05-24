@@ -1,9 +1,5 @@
 describe Mori::API do
 
-  def setup_api(git_path)
-    Helper.setup_api(git_path, 'apiuser')
-  end
-
   describe 'basics' do
     before :each do
       @repo_location = "#{SPEC_PATH}/fixture/books/sample_book#local-only"
