@@ -1,6 +1,6 @@
 require 'bundler/setup'
 require 'padrino-core/cli/rake'
-require 'guard/jasmine/task'
+
 
 PadrinoTasks.use(:database)
 PadrinoTasks.use(:datamapper)
@@ -23,6 +23,14 @@ rescue LoadError
   end
 end
 
-Guard::JasmineTask.new do |task|
-    task.options = '-e test -s jasmine_gem'
+begin
+  require 'guard/jasmine/task'
+rescue
+
+end
+
+if defined? Guard
+  Guard::JasmineTask.new do |task|
+      task.options = '-e test -s jasmine_gem'
+  end
 end
