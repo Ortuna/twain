@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/Ortuna/dm-gitfs-adapter.git
+  revision: b61bd4409a950aa089f9a75c328cbb48cd139e3b
+  specs:
+    dm-gitfs-adapter (1.0.0)
+      dm-core
+      dm-types
+      grit
+
+GIT
   remote: git://github.com/padrino/padrino-framework.git
   revision: cef1cbc123b61aa7dca249f39caabc21b43d4486
   specs:
@@ -31,15 +40,6 @@ GIT
     padrino-mailer (0.11.1)
       mail (~> 2.5.3)
       padrino-core (= 0.11.1)
-
-GIT
-  remote: git@github.com:Ortuna/dm-gitfs-adapter.git
-  revision: b61bd4409a950aa089f9a75c328cbb48cd139e3b
-  specs:
-    dm-gitfs-adapter (1.0.0)
-      dm-core
-      dm-types
-      grit
 
 GEM
   remote: https://rubygems.org/
