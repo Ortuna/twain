@@ -1,6 +1,3 @@
 [submodule "public/javascripts/lib/ace-builds"]
 	path = public/javascripts/lib/ace-builds
 	url = git://github.com/ajaxorg/ace-builds.git
-[submodule "spec/fixture/books/sample_book"]
-	path = spec/fixture/books/sample_book
-	url = git@github.com:Ortuna/sample_tree.git

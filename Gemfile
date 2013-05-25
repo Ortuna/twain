@@ -17,6 +17,9 @@ gem 'dm-serializer'
 gem 'omniauth'
 gem 'omniauth-github'
 
+group :production do 
+  gem 'dm-postgres-adapter'
+end
 
 group :development, :test do
   gem 'pry'
