@@ -13,7 +13,7 @@ DataMapper.logger = logger
 DataMapper::Property::String.length(255)
 
 case Padrino.env
-when :production  then DataMapper.setup(:default, ENV["DATABASE_URL"])
+when :production  then DataMapper.setup(:default, ENV["HEROKU_POSTGRESQL_GRAY_URL"])
 when :test
   test_db_path = Padrino.root('tmp', "test.db")
   FileUtils.rm(test_db_path) if File.exists?(test_db_path)
