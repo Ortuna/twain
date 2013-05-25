@@ -26,7 +26,7 @@ end
 begin
   require 'guard/jasmine/task'
   Guard::JasmineTask.new { |t| t.options = '-e test -s jasmine_gem' }
-rescue
+rescue LoadError
   task :jasmine do
     abort "Guard::Jasmine not avail abortin"
   end
