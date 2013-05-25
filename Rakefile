@@ -25,12 +25,9 @@ end
 
 begin
   require 'guard/jasmine/task'
+  Guard::JasmineTask.new { |t| t.options = '-e test -s jasmine_gem' }
 rescue
-
-end
-
-if defined? Guard
-  Guard::JasmineTask.new do |task|
-      task.options = '-e test -s jasmine_gem'
+  task :jasmine do
+    abort "Guard::Jasmine not avail abortin"
   end
 end
