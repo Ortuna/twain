@@ -90,7 +90,7 @@ body {
 .browser {
   background-color: #fff;
   border-radius: 5px;
-  width:25%;
+  width:15%;
   z-index:5;
   overflow: visible;
   border:3px solid rgba(0,0,0,.15);
@@ -101,4 +101,5 @@ body {
 
 .browser .content {
   padding:10px;
+  font-family: "inconsolata"
 }

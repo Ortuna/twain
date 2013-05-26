@@ -1,15 +1,5 @@
 <div class='content'>
-  <input type='text'>
-  <ul>
-    <li><a href='#'>Chapter 1/</a>
-      <ul>
-        <li><a href='#'>Section 1</a></li>
-        <li><a href='#'>Section 2</a></li>
-        <li><a href='#'>Section 3</a></li>
-      </ul>
-    </li>
-    <li><a href='#'>Chapter 2/</a></li>
-    <li><a href='#'>Chapter 3/</a></li>
-    <li><a href='#'>Chapter 4/</a></li>
-  <ul>
+  {{#each data.book.chapters}}
+    <div class='item'>{{title}}</div>
+  {{/each}}
 </div>

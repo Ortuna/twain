@@ -3,7 +3,20 @@ App.BrowserController = Ember.Controller.extend({
   visible: false,
   show: function(){
     this.toggleProperty('visible');
-  }
+  },
+  data: function(){
+    var data = {
+      book: {
+        title: 'Sample Book',
+        chapters: [
+          { title: 'Chapter 1', message: 'Updated heading of the chapter' },
+          { title: 'Chapter 2', message: 'Init' },
+          { title: 'Chapter 3', message: 'Fixed session code' },
+        ]
+      }
+    }
+    return data;
+  }.property('data'),
 });
 
 App.BrowserView = Ember.View.extend({
@@ -26,16 +39,16 @@ App.BrowserView = Ember.View.extend({
     $element.css('left',  (windowWidth/2)  - (elementWidth/2)  + 'px');
     
   },
-  // animateOpen: function(){
-  //   if(!this.$()) { return; }
-  //   this.$().stop();
-  //   var visible  = this.get('controller.visible');
-  //   var duration = 250;
-  //   var easing   = 'swing';
+  animateOpen: function(){
+    if(!this.$()) { return; }
+    this.$().stop();
+    var visible  = this.get('controller.visible');
+    var duration = 250;
+    var easing   = 'swing';
     
-  //   if(visible)
-  //     this.$().animate({ width: '250px'}, duration, easing);
-  //   else
-  //    this.$().animate({ width: '0px'}, duration, easing);
-  // }.observes('controller.visible'),
+    if(visible)
+      this.$().animate({ width: '250px'}, duration, easing);
+    else
+     this.$().animate({ width: '-0px'}, duration, easing);
+  }.observes('controller.visible'),
 });

@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-# gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
-
+# gem 'padrino', :path => '/Users/ortuna/Desktop/code/opensource/padrino-framework'
 gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 gem 'active_model_serializers'
 gem 'rake'
